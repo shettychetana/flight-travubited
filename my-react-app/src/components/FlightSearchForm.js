@@ -13,24 +13,21 @@ const FlightSearchForm = ({ onSubmit }) => {
         multiCity: [{ from: '', to: '', date: '' }] // Default Multi City array
     });
 
-    // Handle input changes
     const handleChange = (e) => {
         const { name, value, type } = e.target;
         const newValue = type === 'checkbox' ? e.target.checked : value;
         setFormData((prev) => ({ ...prev, [name]: newValue }));
     };
 
-    // Handle trip type selection
     const handleTripTypeToggle = (type) => {
         setFormData((prev) => ({
             ...prev,
             tripType: type,
-            returnDate: type === 'ROUND_TRIP' ? prev.returnDate : '', // Reset return date if not round trip
-            multiCity: type === 'MULTI_CITY' ? [{ from: '', to: '', date: '' }] : prev.multiCity, // Reset multi city
+            returnDate: type === 'ROUND_TRIP' ? prev.returnDate : '',
+            multiCity: type === 'MULTI_CITY' ? [{ from: '', to: '', date: '' }] : prev.multiCity,
         }));
     };
 
-    // Handle multi-city fields
     const handleMultiCityChange = (index, e) => {
         const { name, value } = e.target;
         const updatedMultiCity = [...formData.multiCity];
@@ -38,7 +35,6 @@ const FlightSearchForm = ({ onSubmit }) => {
         setFormData((prev) => ({ ...prev, multiCity: updatedMultiCity }));
     };
 
-    // Handle adding a new multi-city trip
     const addMultiCity = () => {
         setFormData((prev) => ({
             ...prev,
@@ -46,13 +42,11 @@ const FlightSearchForm = ({ onSubmit }) => {
         }));
     };
 
-    // Handle removing a city from the multi-city list
     const removeMultiCity = (index) => {
         const updatedMultiCity = formData.multiCity.filter((_, i) => i !== index);
         setFormData((prev) => ({ ...prev, multiCity: updatedMultiCity }));
     };
 
-    // Submit form data
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData); // Send formData to the parent component
@@ -87,133 +81,130 @@ const FlightSearchForm = ({ onSubmit }) => {
                 </button>
             </div>
 
-            {/* From City */}
-            <div>
-                <label>From:</label>
-                <input
-                    type="text"
-                    name="from"
-                    value={formData.from}
-                    onChange={handleChange}
-                    placeholder="From (e.g., DEL)"
-                    required
-                />
-            </div>
-
-            {/* To City */}
-            <div>
-                <label>To:</label>
-                <input
-                    type="text"
-                    name="to"
-                    value={formData.to}
-                    onChange={handleChange}
-                    placeholder="To (e.g., MAA)"
-                    required
-                />
-            </div>
-
-            {/* Travel Date */}
-            <div>
-                <label>Travel Date:</label>
-                <input
-                    type="date"
-                    name="travelDate"
-                    value={formData.travelDate}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-
-            {/* Return Date (for Round Trip only) */}
-            {formData.tripType === 'ROUND_TRIP' && (
+            {/* Form Fields: From, To, Travel Date, Adults, Children */}
+            <div className="form-row">
                 <div>
-                    <label>Return Date:</label>
+                    <label>From:</label>
+                    <input
+                        type="text"
+                        name="from"
+                        value={formData.from}
+                        onChange={handleChange}
+                        placeholder="From (e.g., DEL)"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>To:</label>
+                    <input
+                        type="text"
+                        name="to"
+                        value={formData.to}
+                        onChange={handleChange}
+                        placeholder="To (e.g., MAA)"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Travel Date:</label>
                     <input
                         type="date"
-                        name="returnDate"
-                        value={formData.returnDate}
+                        name="travelDate"
+                        value={formData.travelDate}
                         onChange={handleChange}
                         required
                     />
                 </div>
+                <div>
+                    <label>Adults:</label>
+                    <input
+                        type="number"
+                        name="adults"
+                        value={formData.adults}
+                        onChange={handleChange}
+                        min="1"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Children:</label>
+                    <input
+                        type="number"
+                        name="children"
+                        value={formData.children}
+                        onChange={handleChange}
+                        min="0"
+                    />
+                </div>
+            </div>
+
+            {/* Return Date (for Round Trip) */}
+            {formData.tripType === 'ROUND_TRIP' && (
+                <div className="form-row">
+                    <div>
+                        <label>Return Date:</label>
+                        <input
+                            type="date"
+                            name="returnDate"
+                            value={formData.returnDate}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                </div>
             )}
 
-            {/* Multi-City (only shown for Multi-City trip type) */}
+            {/* Multi-City Fields */}
             {formData.tripType === 'MULTI_CITY' && (
                 <div className="multi-city-container">
                     <label>Multi City:</label>
                     {formData.multiCity.map((city, index) => (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                name="from"
-                                value={city.from}
-                                onChange={(e) => handleMultiCityChange(index, e)}
-                                placeholder="From"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="to"
-                                value={city.to}
-                                onChange={(e) => handleMultiCityChange(index, e)}
-                                placeholder="To"
-                                required
-                            />
-                            <input
-                                type="date"
-                                name="date"
-                                value={city.date}
-                                onChange={(e) => handleMultiCityChange(index, e)}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="remove-city"
-                                onClick={() => removeMultiCity(index)}
-                            >
-                                Remove City
-                            </button>
-                            {index === formData.multiCity.length - 1 && (
-                                <button type="button" onClick={addMultiCity}>Add another city</button>
-                            )}
+                        <div key={index} className="form-row">
+                            <div>
+                                <input
+                                    type="text"
+                                    name="from"
+                                    value={city.from}
+                                    onChange={(e) => handleMultiCityChange(index, e)}
+                                    placeholder="From"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="text"
+                                    name="to"
+                                    value={city.to}
+                                    onChange={(e) => handleMultiCityChange(index, e)}
+                                    placeholder="To"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    value={city.date}
+                                    onChange={(e) => handleMultiCityChange(index, e)}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <button type="button" className="remove-city" onClick={() => removeMultiCity(index)}>
+                                    Remove City
+                                </button>
+                            </div>
                         </div>
                     ))}
+                    <button type="button" onClick={addMultiCity}>Add another city</button>
                 </div>
             )}
 
-            {/* Travelers & Class */}
-            <div>
-                <label>Adults:</label>
-                <input
-                    type="number"
-                    name="adults"
-                    value={formData.adults}
-                    onChange={handleChange}
-                    min="1"
-                    required
-                />
-            </div>
-            <div>
-                <label>Children:</label>
-                <input
-                    type="number"
-                    name="children"
-                    value={formData.children}
-                    onChange={handleChange}
-                    min="0"
-                />
-            </div>
-            <div>
-                <label>Infants:</label>
-                <input
-                    type="number"
-                    name="infants"
-                    value={formData.infants}
-                    onChange={handleChange}
-                    min="0"
-                />
+            {/* Special Fare Options */}
+            <div className="button-container">
+                <button type="button">Student</button>
+                <button type="button">Senior Citizen</button>
+                <button type="button">Book with Emergency</button>
             </div>
 
             <button type="submit">Search Flights</button>
