@@ -36,3 +36,327 @@
     transform: rotate(360deg);
   }
 }
+/* General Form Styles */
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input,
+button,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+input[type="date"] {
+    padding: 10px;
+}
+
+button {
+    background-color: #0061f2;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0051c2;
+}
+
+button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Trip Type Toggle Buttons */
+.trip-type-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.trip-type-toggle button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.trip-type-toggle button.selected {
+    background-color: #0061f2;
+    color: white;
+    border: 1px solid #0061f2;
+}
+
+/* Dynamic Multi-City Styling */
+.multi-city-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.multi-city-container div {
+    margin-bottom: 20px;
+}
+
+.multi-city-container input {
+    width: 30%;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+button[type="button"] {
+    background-color: #e6e6e6;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+button[type="button"]:hover {
+    background-color: #ccc;
+}
+
+button.remove-city {
+    background-color: #ff3b30;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.remove-city:hover {
+    background-color: #e0322a;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+
+    .trip-type-toggle {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .trip-type-toggle button {
+        margin-bottom: 10px;
+    }
+
+    .multi-city-container input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button[type="button"] {
+        width: 100%;
+    }
+}
+/* done by me */
+/* General Form Styles */
+form {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+label {
+  display: inline-block;
+  width: 150px;  /* Adjust width as per your design */
+  margin-right: 10px; /* Space between label and input */
+  font-weight: bold;
+  font-size: 16px;
+  text-align: right;
+}
+
+input,
+select,
+button {
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  width: 200px;  /* Standard width for all input fields */
+}
+
+input[type="date"] {
+  padding: 10px;
+}
+
+/* Align form fields in a single row using flexbox */
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;  /* Allows the items to wrap to the next line if they don't fit */
+}
+
+.form-row > div {
+  margin-right: 20px; /* Space between form items */
+  flex-basis: 48%;  /* Allow two items per row */
+}
+
+.form-row > div:last-child {
+  margin-right: 0;
+}
+
+/* Trip Type Toggle Buttons (One Way, Round Trip, Multi City) */
+.trip-type-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.trip-type-toggle button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 30%;  /* Each button will take 30% of the container width */
+}
+
+.trip-type-toggle button.selected {
+  background-color: #0061f2;
+  color: white;
+  border: 1px solid #0061f2;
+}
+
+/* Multi-City Layout */
+.multi-city-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.multi-city-container div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.multi-city-container input {
+  width: 30%;  /* Adjust width for input fields */
+  margin-right: 10px;
+}
+
+button[type="button"] {
+  background-color: #e6e6e6;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+button[type="button"]:hover {
+  background-color: #ccc;
+}
+
+button.remove-city {
+  background-color: #ff3b30;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.remove-city:hover {
+  background-color: #e0322a;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #0061f2;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0051c2;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 600px) {
+  .form-row {
+      flex-direction: column;
+  }
+
+  .form-row > div {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .trip-type-toggle {
+      flex-direction: column;
+  }
+
+  .trip-type-toggle button {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .multi-city-container div {
+      flex-direction: column;
+  }
+
+  .multi-city-container input {
+      width: 100%;
+  }
+
+  button[type="submit"] {
+      width: 100%;
+  }
+}
