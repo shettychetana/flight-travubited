@@ -1,0 +1,87 @@
+/* src/components/Banner.css */
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, "Helvetica Neue", "Segoe UI", Roboto, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #666;
+    text-align: left;
+    background-color: #e7e7e8;
+}
+
+#srt-banner {
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.srt-banner-white {
+    color: #262933;
+    box-shadow: 0px 1px 4px 0px #181A251A;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.bg-white {
+    background-color: #fff !important;
+}
+
+*:after, *:before {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.srt-callus {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.phonenoLink {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.phonenoLink:hover {
+    text-decoration: underline;
+}
+
+.srt-logo img {
+    margin-bottom: 10px;
+}
+
+.srt-logo p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #51555e;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}

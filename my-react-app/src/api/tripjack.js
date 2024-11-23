@@ -15,6 +15,7 @@ export const searchFlights = async (payload) => {
     try {
         const response = await api.post('/fms/v1/air-search-all', payload);
         return response.data;
+        
     } catch (error) {
         console.error('Error fetching flights:', error);
         throw error;

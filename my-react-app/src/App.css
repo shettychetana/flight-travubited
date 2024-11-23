@@ -464,3 +464,192 @@ button[type="submit"]:hover {
         width: 100%;
     }
 }
+/**22-06 form css/
+
+/* General Styles for the Form */
+.flight-search-form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling for the Trip Type Buttons (First Line) */
+.trip-type-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.trip-type-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.trip-type-buttons button.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Form Fields Styling (Second Line) */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-row div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    margin-bottom: 5px;
+}
+
+.form-row input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Additional Buttons Styling (Third Line) */
+.extra-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.extra-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.extra-buttons button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Submit Button Styling */
+button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+/* results from api*/
+
+.flight-results-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.filter-sidebar {
+    width: 250px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.filter-section input[type="range"] {
+    width: 100%;
+}
+
+.results-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sort-options {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flight-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.flight-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.flight-card:hover {
+    transform: translateY(-5px);
+}
+
+.flight-details {
+    text-align: center;
+}
+
+.airline-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.flight-time, .flight-duration, .price {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #7a7a7a;
+}
+
+.book-now-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.book-now-btn:hover {
+    background-color: #e5533d;
+}
+
+
