@@ -1,11 +1,124 @@
-/* src/styles/Footer.css */
-.footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
-  
+/* General Footer Styling */
+footer {
+  font-family: "Arial", sans-serif;
+  color: #6c757d;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  background-color: #f76c00;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.newsletter-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.newsletter-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #f76c00;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.newsletter-form button:hover {
+  background-color: #ffcc99;
+}
+
+/* Footer Content */
+.footer-container {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-col h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #000;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #6c757d;
+}
+
+.footer-col ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-logo {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  color: #6c757d;
+  margin-right: 10px;
+}
+
+.social-icons a:hover {
+  color: #f76c00;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-links a {
+  color: #6c757d;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

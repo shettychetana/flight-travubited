@@ -1,0 +1,54 @@
+/* Statistics Container */
+.statistics-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+  }
+  
+  /* Card Styles */
+  .stat-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Icon Styles */
+  .icon-container {
+    background-color: #ffcccb;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+  }
+  
+  .icon-container i {
+    font-size: 24px;
+    color: #f76c00;
+  }
+  
+  /* Number and Label Styles */
+  .stat-card h3 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .stat-card p {
+    font-size: 14px;
+    margin: 5px 0 0;
+    color: #6c757d;
+  }
+  

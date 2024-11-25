@@ -4,7 +4,7 @@ import "../styles/SwitchingTabs.css";
 const SwitchingTabs = () => {
     const [activeTab, setActiveTab] = useState("tab1");
 
-    // Sample data for cards with images
+    
     const homeCards = [
         {
             id: 1,

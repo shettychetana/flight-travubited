@@ -7,12 +7,12 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-left">
-        {/* <img
+        <img
           src="/images/logo.jpeg"
           alt="TravUnited Logo"
           className="header-logo"
-        /> */}
-        <h1 className="header-title">TRAVUNITED</h1>
+        />
+        {/* <h1 className="header-title">TRAVUNITED</h1> */}
         <p className="header-subtitle">LIVE LOVE EXPLORE</p>
       </div>
       <nav className="header-nav">

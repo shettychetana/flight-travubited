@@ -1,0 +1,70 @@
+/* HotelSlider.css */
+.stayOffr__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stayOffr__heading {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .stayOffr__subheading {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .stayOffr__cta {
+    font-size: 16px;
+    color: #0066cc;
+  }
+  
+  .stayOffr__list {
+    margin-top: 20px;
+  }
+  
+  .stayOffr__list--item {
+    display: flex;
+    margin-right: 15px;
+  }
+  
+  .stayOffr__list--itemImg img {
+    width: 100%;
+    max-width: 200px;
+    height: 140px;
+    object-fit: cover;
+  }
+  
+  .stayOffr__list--itemDesc {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .stayOffr__list--itemDescLft {
+    flex-grow: 1;
+  }
+  
+  .stayOffr__list--itemTitle {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .stayOffr__price {
+    font-size: 18px;
+    color: #000;
+  }
+  
+  .stayOffr__pernight {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  /* For carousel arrows */
+  .slick-arrow {
+    background-color: #0066cc;
+    color: #fff;
+  }
+  
