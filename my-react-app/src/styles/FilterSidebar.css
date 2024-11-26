@@ -1,0 +1,13 @@
+.filter-sidebar {
+    max-width: 300px;
+}
+
+.filter-sidebar .btn-outline-danger {
+    border-color: #ff5a5f;
+    color: #ff5a5f;
+}
+
+.filter-sidebar .btn-outline-danger:hover {
+    background-color: #ff5a5f;
+    color: white;
+}

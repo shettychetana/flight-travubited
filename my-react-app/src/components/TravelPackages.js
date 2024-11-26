@@ -2,39 +2,58 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Card, Nav } from "react-bootstrap";
 
 const allPackages = {
-  "Hot Details": [
+  "Asia": [
     {
-      img: "https://via.placeholder.com/300x200", // Replace with actual image URL
-      duration: "6 days, 6 Night",
-      price: "$549/person",
-      title: "Explore the beauty of Blue lagoon",
-      location: "London, Inggris",
+      img: "images/sydeny1.png",
+      duration: "10 days, 9 Night",
+      price: "$2181/person",
+      title: "breathtaking landscapes await",
+      location: "Sydney, Australia",
     },
     {
-      img: "https://via.placeholder.com/300x200", // Replace with actual image URL
+      img: "images/cambodia.png",
+      duration: "4 days, 3 Night",
+      price: "$380/person",
+      title: "Discover ancient temples, lush landscapes",
+      location: "Angkor Thon, Cambodia",
+    },
+    {
+      img: "images/hongkong.png",
+      duration: "6 days, 5 Night",
+      price: "$849/person",
+      title: "A vibrant blend of tradition and skyscrapers",
+      location: "Macau, Hong Kong",
+    },
+    {
+      img: "images/indonesia.png",
+      duration: "5 days, 4 Night",
+      price: "$333/person",
+      title: "Tropical beaches, lush jungles,and vibrant culture",
+      location: "Bali, Indonesia",
+    },
+  ],
+  "Central Asia": [
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "6 days, 6 Night",
+      price: "$549/person",
+      title: "Explore the beauty of ",
+      location: "London, Australia",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
       duration: "2 days, 2 Night",
       price: "$349/person",
       title: "Explore the beauty of Petra",
-      location: "London, Inggris",
+      location: "London, Cambodia",
     },
-    {
-      img: "https://via.placeholder.com/300x200", // Replace with actual image URL
-      duration: "5 days, 4 Night",
-      price: "$849/person",
-      title: "Explore the beauty of Old bagan",
-      location: "London, Inggris",
-    },
-  ],
-  "Back Pack": [
     {
       img: "https://via.placeholder.com/300x200",
-      duration: "4 days, 3 Night",
-      price: "$450/person",
-      title: "Backpack to the Alps",
-      location: "Zurich, Switzerland",
+      duration: "5 days, 4 Night",
+      price: "$849/person",
+      title: "Explore the beauty of ",
+      location: "London, Hong Kong",
     },
-  ],
-  Asia: [
     {
       img: "https://via.placeholder.com/300x200",
       duration: "7 days, 6 Night",
@@ -43,16 +62,37 @@ const allPackages = {
       location: "Bali, Indonesia",
     },
   ],
-  Europe: [
+  "Middle Asia": [
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "6 days, 6 Night",
+      price: "$549/person",
+      title: "Explore the beauty of ",
+      location: "London, Australia",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "2 days, 2 Night",
+      price: "$349/person",
+      title: "Explore the beauty of Petra",
+      location: "London, Cambodia",
+    },
     {
       img: "https://via.placeholder.com/300x200",
       duration: "5 days, 4 Night",
-      price: "$899/person",
-      title: "Romance in Paris",
-      location: "Paris, France",
+      price: "$849/person",
+      title: "Explore the beauty of ",
+      location: "London, Hong Kong",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "7 days, 6 Night",
+      price: "$799/person",
+      title: "Adventure in Bali",
+      location: "Bali, Indonesia",
     },
   ],
-  More: [
+  "Africa": [
     {
       img: "https://via.placeholder.com/300x200",
       duration: "10 days, 9 Night",
@@ -60,11 +100,62 @@ const allPackages = {
       title: "Discover the Outback",
       location: "Sydney, Australia",
     },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "8 days, 7 Night",
+      price: "$999/person",
+      title: "Northern Lights Adventure",
+      location: "Reykjavik, Iceland",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "5 days, 4 Night",
+      price: "$849/person",
+      title: "Explore the beauty of ",
+      location: "London, Hong Kong",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "7 days, 6 Night",
+      price: "$799/person",
+      title: "Adventure in Bali",
+      location: "Bali, Indonesia",
+    },
+  ],
+  "Americas": [
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "6 days, 6 Night",
+      price: "$549/person",
+      title: "Explore the beauty of ",
+      location: "London, Australia",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "2 days, 2 Night",
+      price: "$349/person",
+      title: "Explore the beauty of Petra",
+      location: "London, Cambodia",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "5 days, 4 Night",
+      price: "$849/person",
+      title: "Explore the beauty of ",
+      location: "London, Hong Kong",
+    },
+    {
+      img: "https://via.placeholder.com/300x200",
+      duration: "7 days, 6 Night",
+      price: "$799/person",
+      title: "Adventure in Bali",
+      location: "Bali, Indonesia",
+    },
   ],
 };
 
 const TravelPackages = () => {
-  const [activeTab, setActiveTab] = useState("Hot Details");
+  const [activeTab, setActiveTab] = useState("Asia");
 
   return (
     <Container className="my-5">
@@ -91,7 +182,7 @@ const TravelPackages = () => {
       {/* Packages */}
       <Row>
         {allPackages[activeTab].map((pkg, idx) => (
-          <Col md={4} className="mb-4" key={idx}>
+          <Col lg={3} md={6} sm={12} className="mb-4" key={idx}>
             <Card className="shadow border-0">
               <Card.Img variant="top" src={pkg.img} alt={pkg.title} />
               <Card.Body>

@@ -1,105 +1,147 @@
 import React from "react";
-import "../styles/Footer.css"; // Import custom CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer style={{ backgroundColor: "#ffffff", color: "#000000" }} className="pt-5">
       {/* Newsletter Section */}
-      <div className="newsletter-section">
-        <h3>Subscribe and get exclusive deals & offer</h3>
-        <form className="newsletter-form">
-          <input
-            type="email"
-            placeholder="Enter your mail"
-            aria-label="Email"
-            required
-          />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
+      <div className="text-center py-3 bg-light">
+  <h3>Subscribe and get exclusive deals & offer</h3>
+  <form className="row justify-content-center align-items-center mt-3">
+    {/* Email Input */}
+    <div className="col-md-6 mb-2 mb-md-0">
+      <input
+        type="email"
+        className="form-control"
+        placeholder="Enter your mail"
+        aria-label="Email"
+        required
+      />
+    </div>
+
+    {/* Subscribe Button */}
+    <div className="col-md-auto">
+      <button type="submit" className="btn btn-dark w-100">
+        Subscribe
+      </button>
+    </div>
+  </form>
+</div>
 
       {/* Footer Content */}
-      <div className="footer-container">
-        <div className="footer-row">
+      <div className="container py-5">
+        <div className="row">
           {/* Logo and Tagline */}
-          <div className="footer-col">
+          <div className="col-md-3">
             <img
               src="logo.png"
               alt="TravUnited Logo"
-              className="footer-logo"
+              className="img-fluid mb-3"
             />
             <p>Book your trip in minutes, get full control for much longer.</p>
-            <div className="social-icons">
-              <a href="#">
+            <div className="d-flex">
+              <a
+                href="#"
+                className="text-dark me-3 fs-5"
+                aria-label="Facebook"
+              >
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#">
+              <a href="#" className="text-dark me-3 fs-5" aria-label="Twitter">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#">
+              <a
+                href="#"
+                className="text-dark fs-5"
+                aria-label="Instagram"
+              >
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
           </div>
 
           {/* Links - Company */}
-          <div className="footer-col">
+          <div className="col-md-3">
             <h4>Company</h4>
-            <ul>
+            <ul className="list-unstyled">
               <li>
-                <a href="#">About</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  About
+                </a>
               </li>
               <li>
-                <a href="#">Careers</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Careers
+                </a>
               </li>
               <li>
-                <a href="#">Logistic</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Logistic
+                </a>
               </li>
               <li>
-                <a href="#">Privacy & Policy</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Privacy & Policy
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Links - Contact */}
-          <div className="footer-col">
+          <div className="col-md-3">
             <h4>Contact</h4>
-            <ul>
+            <ul className="list-unstyled">
               <li>
-                <a href="#">Help/FAQ</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Help/FAQ
+                </a>
               </li>
               <li>
-                <a href="#">Press</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Press
+                </a>
               </li>
               <li>
-                <a href="#">Affiliates</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Affiliates
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Links - More */}
-          <div className="footer-col">
+          <div className="col-md-3">
             <h4>More</h4>
-            <ul>
+            <ul className="list-unstyled">
               <li>
-                <a href="#">Press Centre</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Press Centre
+                </a>
               </li>
               <li>
-                <a href="#">Our Blog</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Our Blog
+                </a>
               </li>
               <li>
-                <a href="#">Low fare tips</a>
+                <a href="#" className="text-dark text-decoration-none">
+                  Low fare tips
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Copyright Section */}
-        <div className="footer-bottom">
-          <p>Copyright, TravUnited 2024. All rights reserved.</p>
-          <div className="footer-links">
-            <a href="#">Corporate Deals</a>
-            <a href="#">Terms & Conditions</a>
+        <div className="text-center mt-4">
+          <p className="mb-2">Copyright, TravUnited 2024. All rights reserved.</p>
+          <div>
+            <a href="#" className="text-dark text-decoration-none me-3">
+              Corporate Deals
+            </a>
+            <a href="#" className="text-dark text-decoration-none">
+              Terms & Conditions
+            </a>
           </div>
         </div>
       </div>

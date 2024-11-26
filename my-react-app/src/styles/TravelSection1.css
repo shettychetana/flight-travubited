@@ -1,0 +1,70 @@
+/* Main Container */
+.travel-section {
+    text-align: center;
+  }
+  
+  /* See All Button */
+  .see-all-btn {
+    border-color: #ff6748;
+    color: #ff6748;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .see-all-btn:hover {
+    background-color: #ff6748;
+    color: white;
+  }
+  
+  /* Left Card Styling */
+  .travel-description-card {
+    background-color: #ff6748;
+    color: white;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .travel-description-card h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .travel-description-card .price-tag {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .travel-description-card .price-tag span {
+    color: #ffd700; /* Gold color */
+  }
+  
+  .travel-description-card .book-btn {
+    background-color: white;
+    color: #ff6748;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .travel-description-card .book-btn:hover {
+    background-color: #ffd700;
+    color: #ff6748;
+  }
+  
+  /* Right Image Grid */
+  .travel-image {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .travel-image:hover {
+    transform: scale(1.05);
+  }
+  

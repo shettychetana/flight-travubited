@@ -2,20 +2,27 @@ import React from 'react';
 
 const FlightCard = ({ flight }) => {
     return (
-        <div className="flight-card">
-            <div className="flight-details">
-                <div className="airline-name">{flight.airline}</div>
-                <div className="flight-time">
-                    <p>Departure: {flight.departureTime}</p>
-                    <p>Arrival: {flight.arrivalTime}</p>
+        <div className="card mb-3 shadow-sm">
+            <div className="card-body">
+                {/* Airline Name */}
+                <h5 className="card-title text-primary">{flight.airline}</h5>
+
+                {/* Flight Times */}
+                <div className="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p className="mb-1"><strong>Departure:</strong> {flight.departureTime}</p>
+                        <p><strong>Arrival:</strong> {flight.arrivalTime}</p>
+                    </div>
+                    <div>
+                        <p><strong>Duration:</strong> {flight.duration}</p>
+                    </div>
                 </div>
-                <div className="flight-duration">
-                    <p>Duration: {flight.duration}</p>
+
+                {/* Price */}
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                    <h6 className="text-success">Price: ₹{flight.price}</h6>
+                    <button className="btn btn-primary btn-sm">Book Now</button>
                 </div>
-                <div className="price">
-                    <p>Price: ₹{flight.price}</p>
-                </div>
-                <button className="book-now-btn">Book Now</button>
             </div>
         </div>
     );

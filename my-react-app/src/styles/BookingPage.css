@@ -1,0 +1,18 @@
+/* Custom class to disable hover effects */
+.custom-btn {
+    border: 1px solid #FF6748;
+    background-color: white;
+    width: 50px;
+    transition: none; /* Prevents any transition effect */
+  }
+  
+  .custom-btn:hover {
+    background-color: white; /* Keeps background the same */
+    color: inherit; /* Prevents color change */
+  }
+.imagecls{
+    objectFit: cover;
+                height: 400px;
+                border-radius: 50px;
+}
+                

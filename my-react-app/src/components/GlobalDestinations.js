@@ -6,10 +6,10 @@ const destinations = [
   { img: "images/Sydney.png", name: "Sydney, Australia" },
   { img: "images/Azerbaijan.png", name: "Baku, Azerbaijan" },
   { img: "images/Maldives.png", name: "Male, Maldives" },
-  { img: "https://via.placeholder.com/300x200", name: "Paris, France" },
-  { img: "https://via.placeholder.com/300x200", name: "New York, US" },
-  { img: "https://via.placeholder.com/300x200", name: "London, UK" },
-  { img: "https://via.placeholder.com/300x200", name: "Tokyo, Japan" },
+  { img: "images/france1.png", name: "Paris, France" },
+  { img: "images/uk.png", name: "New York, US" },
+  { img: "images/london.png", name: "London, UK" },
+  { img: "images/japan.png", name: "Tokyo, Japan" },
   { img: "images/dubai.png", name: "Dubai, UAE" },
 ];
 

@@ -211,3 +211,34 @@
 .book-btn:hover {
     background-color: #0056b3;
 }
+.flight-results-container {
+    display: flex;
+}
+
+.filter-sidebar {
+    width: 25%;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.flight-list {
+    width: 75%;
+    padding: 20px;
+}
+
+.flight-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.book-now-btn {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
