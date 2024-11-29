@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FlightResults from './FlightResults';
 
 const FlightSearchForm = () => {
     const [formData, setFormData] = useState({
@@ -82,9 +83,10 @@ const FlightSearchForm = () => {
 
             const data = await response.json();
             console.log(data);
-
+            
             // After getting the data, navigate to the results page and pass the data
             navigate('/results', { state: { results: data.searchResult?.tripInfos?.ONWARD || [] } });
+            
         } catch (error) {
             console.error('Error fetching flight data:', error);
         }

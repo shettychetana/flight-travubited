@@ -52,9 +52,9 @@ const App = () => {
     return (
         <Router>
             <Routes>
-                {/* Routes without Layout */}
-                <Route path="/results" element={<FlightResults />} />
-                <Route path="/booking" element={<BookingPage />} /> {/* BookingPage route */}
+            
+            <Route path="/results" element={<FlightResults />} />
+            <Route path="/booking" element={<BookingPage />} />
 
                 {/* Routes with Layout */}
                 <Route
