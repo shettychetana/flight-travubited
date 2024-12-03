@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 
 const Form1 = () => {
   return (
-    <div className="form-container p-4" style={formStyles}>
+    <div className="form-container p-4 "  >
       <Form>
         {/* Trip Type */}
         <Row className="mb-3">

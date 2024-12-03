@@ -1,150 +1,95 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: "#ffffff", color: "#000000" }} className="pt-5">
+    <footer style={{ backgroundColor: "#FA5B48", color: "#fff" }}>
       {/* Newsletter Section */}
-      <div className="text-center py-3 bg-light">
-  <h3>Subscribe and get exclusive deals & offer</h3>
-  <form className="row justify-content-center align-items-center mt-3">
-    {/* Email Input */}
-    <div className="col-md-6 mb-2 mb-md-0">
-      <input
-        type="email"
-        className="form-control"
-        placeholder="Enter your mail"
-        aria-label="Email"
-        required
-      />
-    </div>
-
-    {/* Subscribe Button */}
-    <div className="col-md-auto">
-      <button type="submit" className="btn btn-dark w-100">
-        Subscribe
-      </button>
-    </div>
-  </form>
-</div>
+      <div
+        style={{
+          backgroundColor: "#00103D",
+          borderRadius: "8px",
+          padding: "20px",
+          marginBottom: "20px",
+        }}
+      >
+        <Container>
+          <Row className="align-items-center">
+            <Col md={8} className="text-white">
+              <h3>Subscribe Newsletter</h3>
+              <p style={{ color: "#BDBDBD" }}>
+                The Travel! Get inspired! Receive travel discounts, tips, and behind-the-scenes stories.
+              </p>
+            </Col>
+            <Col md={4}>
+              <Form className="d-flex">
+                <Form.Control
+                  type="email"
+                  placeholder="Your email address"
+                  className="me-2"
+                  style={{ borderRadius: "4px" }}
+                />
+                <Button variant="success" style={{ borderRadius: "4px" }}>
+                  Subscribe
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </div>
 
       {/* Footer Content */}
-      <div className="container py-5">
-        <div className="row">
-          {/* Logo and Tagline */}
-          <div className="col-md-3">
-            <img
-              src="logo.png"
-              alt="TravUnited Logo"
-              className="img-fluid mb-3"
-            />
-            <p>Book your trip in minutes, get full control for much longer.</p>
-            <div className="d-flex">
-              <a
-                href="#"
-                className="text-dark me-3 fs-5"
-                aria-label="Facebook"
-              >
+      <Container>
+        <Row className="py-4">
+          {/* Logo and Name */}
+          <Col md={3}>
+            <h5>TravUnited</h5>
+            <p>Explore the world with us!</p>
+            <div>
+              <a href="#" style={{ color: "#fff", margin: "0 10px" }}>
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" className="text-dark me-3 fs-5" aria-label="Twitter">
+              <a href="#" style={{ color: "#fff", margin: "0 10px" }}>
                 <i className="fab fa-twitter"></i>
               </a>
-              <a
-                href="#"
-                className="text-dark fs-5"
-                aria-label="Instagram"
-              >
+              <a href="#" style={{ color: "#fff", margin: "0 10px" }}>
+                <i className="fab fa-youtube"></i>
+              </a>
+              <a href="#" style={{ color: "#fff", margin: "0 10px" }}>
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
-          </div>
+          </Col>
 
-          {/* Links - Company */}
-          <div className="col-md-3">
-            <h4>Company</h4>
+          {/* Links Sections */}
+          <Col md={3}>
+            <h5>Our Destinations</h5>
             <ul className="list-unstyled">
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Logistic
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Privacy & Policy
-                </a>
-              </li>
+              <li>Canada</li>
+              <li>Alaska</li>
+              <li>France</li>
+              <li>Iceland</li>
             </ul>
-          </div>
-
-          {/* Links - Contact */}
-          <div className="col-md-3">
-            <h4>Contact</h4>
+          </Col>
+          <Col md={3}>
+            <h5>Our Activities</h5>
             <ul className="list-unstyled">
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Help/FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Press
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Affiliates
-                </a>
-              </li>
+              <li>Northern Lights</li>
+              <li>Cruising & Sailing</li>
+              <li>Multi-activities</li>
+              <li>Kayaking</li>
             </ul>
-          </div>
-
-          {/* Links - More */}
-          <div className="col-md-3">
-            <h4>More</h4>
+          </Col>
+          <Col md={3}>
+            <h5>Travel Blogs</h5>
             <ul className="list-unstyled">
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Press Centre
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Our Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-dark text-decoration-none">
-                  Low fare tips
-                </a>
-              </li>
+              <li>Bali Travel Guide</li>
+              <li>Sri Lanka Travel Guide</li>
+              <li>Peru Travel Guide</li>
             </ul>
-          </div>
-        </div>
-
-        {/* Copyright Section */}
-        <div className="text-center mt-4">
-          <p className="mb-2">Copyright, TravUnited 2024. All rights reserved.</p>
-          <div>
-            <a href="#" className="text-dark text-decoration-none me-3">
-              Corporate Deals
-            </a>
-            <a href="#" className="text-dark text-decoration-none">
-              Terms & Conditions
-            </a>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </footer>
   );
 };

@@ -45,16 +45,16 @@ const TravelSection1 = () => {
         <Col md={6}>
           <Row className="g-2">
             <Col md={6} sm={6}>
-              <div className="travel-image" style={{ backgroundImage: "url('/images/sri-lanka-1.jpg')" }}></div>
+              <div className="travel-image" style={{ backgroundImage: "url('/images/travel.png')" }}></div>
             </Col>
             <Col md={6} sm={6}>
-              <div className="travel-image" style={{ backgroundImage: "url('/images/sri-lanka-2.jpg')" }}></div>
+              <div className="travel-image" style={{ backgroundImage: "url('/images/travel2.png')" }}></div>
             </Col>
             <Col md={6} sm={6}>
-              <div className="travel-image" style={{ backgroundImage: "url('/images/sri-lanka-3.jpg')" }}></div>
+              <div className="travel-image" style={{ backgroundImage: "url('/images/travel3.png')" }}></div>
             </Col>
             <Col md={6} sm={6}>
-              <div className="travel-image" style={{ backgroundImage: "url('/images/sri-lanka-4.jpg')" }}></div>
+              <div className="travel-image" style={{ backgroundImage: "url('/images/travel4.png')" }}></div>
             </Col>
           </Row>
         </Col>

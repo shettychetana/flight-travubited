@@ -1,29 +1,64 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import Slider from "react-slick";
+import { Container } from "react-bootstrap";
 
 const partners = [
   { src: "images/Fly Emirates.png", alt: "Fly Emirates" },
-  { src: "https://via.placeholder.com/150x50?text=Trivago", alt: "Trivago" },
-  { src: "https://via.placeholder.com/150x50?text=Airbnb", alt: "Airbnb" },
-  { src: "https://via.placeholder.com/150x50?text=Turkish+Airlines", alt: "Turkish Airlines" },
-  { src: "https://via.placeholder.com/150x50?text=Swiss", alt: "Swiss" },
+  { src: "images/Alaska Airlines.png", alt: "Alaska Airlines" },
+  { src: "images/2.png", alt: "Airbnb" },
+  { src: "images/2.png", alt: "Turkish Airlines" },
+  { src: "images/3.png", alt: "Swiss" },
+  { src: "images/4.png", alt: "Swiss" },
+  { src: "images/5.png", alt: "Swiss" },
 ];
 
 const LogoCarousel = () => {
+  const settings = {
+    dots: false, // Add navigation dots
+    infinite: true, // Infinite loop
+    speed: 500, // Transition speed
+    slidesToShow: 4, // Number of slides to show at a time
+    slidesToScroll: 1, // Number of slides to scroll at a time
+    autoplay: true, // Enable autoplay
+    autoplaySpeed: 2000, // Autoplay interval in ms
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024, // Breakpoint for tablets
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600, // Breakpoint for mobile
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, // Smaller mobile screens
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="bg-light py-4">
       <Container>
-        <Row className="align-items-center text-center">
+        <Slider {...settings}>
           {partners.map((partner, index) => (
-            <Col xs={6} sm={4} md={2} key={index}>
+            <div key={index} className="text-center">
               <img
                 src={partner.src}
                 alt={partner.alt}
-                className="img-fluid mx-auto d-block"
+                className="img-fluid mx-auto"
+                style={{ maxWidth: "100px" }}
               />
-            </Col>
+            </div>
           ))}
-        </Row>
+        </Slider>
       </Container>
     </div>
   );

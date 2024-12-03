@@ -1,244 +1,30 @@
-.flight-results-container {
-    display: flex;
-    justify-content: center; /* Centers the entire list horizontally */
-    align-items: center; /* Centers the entire list vertically */
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the container takes full height of the viewport */
-    background-color: #f9f9f9;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.flight-list {
-    display: flex;
-    flex-direction: column; /* Stack the flight cards vertically */
-    gap: 20px; /* Space between flight cards */
-    width: 100%; /* Ensure the flight list takes full width */
-    max-width: 800px; /* Optional: limit max width of the flight list */
-}
-
-.flight-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers content within each card */
-    text-align: center; /* Centers the text */
-}
-
-.flight-row {
-    display: flex;
-    justify-content: space-between; /* Distribute items horizontally */
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.flight-detail {
-    font-size: 14px;
-    color: #555;
-    flex: 1; /* Distribute space equally */
-}
-
-.flight-card strong {
-    color: #333;
-}
-
-.book-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #007bff;
+.direct-flight {
+    background-color: #FF6748; /* Orange for direct flights */
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
-.book-btn:hover {
-    background-color: #0056b3;
-}
-
-@media screen and (max-width: 768px) {
-    .flight-row {
-        flex-direction: column; /* Stack details vertically on small screens */
-        align-items: flex-start;
-    }
-
-    .book-btn {
-        width: 100%; /* Full-width button on smaller screens */
-    }
-}
-/**/
-.airline-logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-/**/
-.flight-results-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: row;
-    min-height: 100vh;
-    background-color: #f9f9f9;
-    padding: 20px;
+.connecting-flight {
+    background-color: black;
+    color: white;
 }
 
 .sidebar {
-    width: 250px;
+    width: 300px;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
-}
-
-.filter {
-    margin-bottom: 15px;
-}
-
-.filter label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.filter select {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.range-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.price-range {
-    width: 45%;
-}
-
-.flight-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px;
-}
-
-.flight-card {
-    background-color: #fff;
-    padding: 20px;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
-.flight-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.flight-logo img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-.flight-info {
-    flex: 1;
-}
-
-.flight-name {
+.sidebar-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.flight-duration {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-}
-
-.flight-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.flight-detail {
-    font-size: 14px;
-    color: #555;
-}
-
-.flight-price {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.book-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.book-btn:hover {
-    background-color: #0056b3;
-}
-.flight-results-container {
-    display: flex;
-}
-
-.filter-sidebar {
-    width: 25%;
-    padding: 20px;
-    border-right: 1px solid #ccc;
+    margin-bottom: 20px;
 }
 
 .flight-list {
-    width: 75%;
     padding: 20px;
-}
-
-.flight-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.book-now-btn {
-    background-color: #ff6600;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }

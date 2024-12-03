@@ -7,7 +7,7 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Statistics from './components/Statistics';
-import Reviews from './components/Reviews';
+// import Reviews from './components/Reviews';
 import BlogSection from './components/BlogSection';
 import TravelPackages from './components/TravelPackages';
 import PopularDestinations from './components/PopularDestinations';
@@ -15,6 +15,7 @@ import GlobalDestinations from './components/GlobalDestinations';
 import LogoCarousel from './components/LogoCarousel';
 import TravelSection from './components/TravelSection';
 import TravelSection1 from './components/TravelSection1';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -39,7 +40,7 @@ const Layout = ({ children }) => {
                     <PopularDestinations />
                     <TravelPackages />
                     <BlogSection />
-                    <Reviews />
+ {/* <Reviews /> */}
                     <Statistics />
                     <Footer />
                 </>

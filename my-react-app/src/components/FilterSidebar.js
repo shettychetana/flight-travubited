@@ -1,163 +1,94 @@
 import React, { useState } from 'react';
-import '../styles/FilterSidebar.css'; // Custom styles for the sidebar
+import "../styles/FilterSidebar.css";
 
-const FilterSidebar = ({
-    minPrice,
-    setMinPrice,
-    maxPrice,
-    setMaxPrice,
-    airlineFilter,
-    setAirlineFilter,
-    tripFilter,
-    setTripFilter,
-}) => {
-    const [showPrice, setShowPrice] = useState(true);
-    const [showTime, setShowTime] = useState(true);
-    const [showRating, setShowRating] = useState(true);
-    const [showAirlines, setShowAirlines] = useState(true);
-    const [showTrips, setShowTrips] = useState(true);
+const FilterSidebar = ({ airlines, onFilterChange }) => {
+    const [selectedAirlines, setSelectedAirlines] = useState([]);
+    const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+    const [departureTime, setDepartureTime] = useState({ start: '', end: '' });
 
-    const toggleSection = (sectionSetter) => {
-        sectionSetter((prevState) => !prevState);
+    // Handle airline selection
+    const handleAirlineChange = (e) => {
+        const airline = e.target.value;
+        setSelectedAirlines((prev) =>
+            prev.includes(airline) ? prev.filter((a) => a !== airline) : [...prev, airline]
+        );
+    };
+
+    // Handle filter submission
+    const applyFilters = () => {
+        onFilterChange({
+            airlines: selectedAirlines,
+            priceRange,
+            departureTime,
+        });
     };
 
     return (
         <div className="filter-sidebar">
             <h3>Filters</h3>
 
-            {/* Price Section */}
+            {/* Airline Filter */}
             <div className="filter-section">
-                <div
-                    className="filter-header"
-                    onClick={() => toggleSection(setShowPrice)}
-                >
-                    <span>Price</span>
-                    <span>{showPrice ? '▲' : '▼'}</span>
-                </div>
-                {showPrice && (
-                    <div className="filter-content">
+                <h4>Airlines</h4>
+                {airlines.map((airline, index) => (
+                    <div key={index}>
                         <input
-                            type="range"
-                            min="50"
-                            max="1200"
-                            value={minPrice}
-                            onChange={(e) => setMinPrice(Number(e.target.value))}
+                            type="checkbox"
+                            value={airline}
+                            checked={selectedAirlines.includes(airline)}
+                            onChange={handleAirlineChange}
                         />
-                        <span>${minPrice}</span>
-                        <input
-                            type="range"
-                            min="50"
-                            max="1200"
-                            value={maxPrice}
-                            onChange={(e) => setMaxPrice(Number(e.target.value))}
-                        />
-                        <span>${maxPrice}</span>
+                        <label>{airline}</label>
                     </div>
-                )}
+                ))}
             </div>
 
-            {/* Departure Time Section */}
+            {/* Price Range Filter */}
             <div className="filter-section">
-                <div
-                    className="filter-header"
-                    onClick={() => toggleSection(setShowTime)}
-                >
-                    <span>Departure Time</span>
-                    <span>{showTime ? '▲' : '▼'}</span>
+                <h4>Price Range</h4>
+                <div>
+                    <label>Min:</label>
+                    <input
+                        type="number"
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+                        placeholder="Min Price"
+                    />
                 </div>
-                {showTime && (
-                    <div className="filter-content">
-                        <input
-                            type="time"
-                            onChange={(e) => console.log('Departure time:', e.target.value)}
-                        />
-                        <input
-                            type="time"
-                            onChange={(e) => console.log('Arrival time:', e.target.value)}
-                        />
-                    </div>
-                )}
+                <div>
+                    <label>Max:</label>
+                    <input
+                        type="number"
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                        placeholder="Max Price"
+                    />
+                </div>
             </div>
 
-            {/* Rating Section */}
+            {/* Departure Time Filter */}
             <div className="filter-section">
-                <div
-                    className="filter-header"
-                    onClick={() => toggleSection(setShowRating)}
-                >
-                    <span>Rating</span>
-                    <span>{showRating ? '▲' : '▼'}</span>
+                <h4>Departure Time</h4>
+                <div>
+                    <label>Start:</label>
+                    <input
+                        type="time"
+                        value={departureTime.start}
+                        onChange={(e) => setDepartureTime({ ...departureTime, start: e.target.value })}
+                    />
                 </div>
-                {showRating && (
-                    <div className="filter-content">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                            <button
-                                key={rating}
-                                className="rating-button"
-                                onClick={() => console.log('Selected rating:', rating)}
-                            >
-                                {rating}+
-                            </button>
-                        ))}
-                    </div>
-                )}
+                <div>
+                    <label>End:</label>
+                    <input
+                        type="time"
+                        value={departureTime.end}
+                        onChange={(e) => setDepartureTime({ ...departureTime, end: e.target.value })}
+                    />
+                </div>
             </div>
 
-            {/* Airlines Section */}
-            <div className="filter-section">
-                <div
-                    className="filter-header"
-                    onClick={() => toggleSection(setShowAirlines)}
-                >
-                    <span>Airlines</span>
-                    <span>{showAirlines ? '▲' : '▼'}</span>
-                </div>
-                {showAirlines && (
-                    <div className="filter-content">
-                        {['Emirates', 'Fly Dubai', 'Qatar', 'Etihad'].map((airline) => (
-                            <label key={airline} className="checkbox-label">
-                                <input
-                                    type="checkbox"
-                                    value={airline}
-                                    onChange={(e) =>
-                                        setAirlineFilter(e.target.value)
-                                    }
-                                />
-                                {airline}
-                            </label>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            {/* Trips Section */}
-            <div className="filter-section">
-                <div
-                    className="filter-header"
-                    onClick={() => toggleSection(setShowTrips)}
-                >
-                    <span>Trips</span>
-                    <span>{showTrips ? '▲' : '▼'}</span>
-                </div>
-                {showTrips && (
-                    <div className="filter-content">
-                        {['Round trip', 'One Way', 'Multi-City', 'My Dates Are Flexible'].map(
-                            (trip) => (
-                                <label key={trip} className="checkbox-label">
-                                    <input
-                                        type="checkbox"
-                                        value={trip}
-                                        onChange={(e) =>
-                                            setTripFilter(e.target.value)
-                                        }
-                                    />
-                                    {trip}
-                                </label>
-                            )
-                        )}
-                    </div>
-                )}
-            </div>
+            {/* Apply Filters Button */}
+            <button onClick={applyFilters}>Apply Filters</button>
         </div>
     );
 };

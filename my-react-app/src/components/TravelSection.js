@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import "../styles/TravelSection.css"; // Custom CSS for background styling
 
+
 const TravelSection = () => {
   const destinations = [
     {
@@ -53,17 +54,17 @@ const TravelSection = () => {
                 <p className="price">{destination.price}</p>
                 <Button
                 className="book-btn"
-                style={{ backgroundColor: '#ff6748', color: 'white' }}
+                style={{ backgroundColor: '#ff6748', color: 'white',padding:'2px' }}
                 >
-                Book Flight
+                Book Now
                 </Button>
               </div>
             </div>
           </Col>
         ))}
       </Row>
-      <div className="text-center mt-4">
-        <Button variant="outline-secondary">See All</Button>
+      <div className="text-center mt-4 ">
+        <Button variant="" className="butseeall">See All</Button>
       </div>
     </Container>
   );

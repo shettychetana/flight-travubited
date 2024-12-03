@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Card, Nav } from "react-bootstrap";
+import  "../styles/TravelPackages.css"
 
 const allPackages = {
   "Asia": [

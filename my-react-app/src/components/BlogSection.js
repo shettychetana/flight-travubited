@@ -1,9 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import '../styles/BlogSection.css'; // Assuming you're using a separate CSS file
 
 const BlogSection = () => {
   return (
-    <Container className="my-5">
+    <Container className="blog-boxed-container my-5">
       <Row className="align-items-center">
         {/* Left Side - Image */}
         <Col md={6} className="mb-4 mb-md-0">

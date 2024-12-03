@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Row, Col, Card, Button, Form } from 'react-bootstrap';
-import { FaFilter } from 'react-icons/fa'; // You can install react-icons if you want to use icons
-import Form1 from '../components/Form1';
-
-
+import { FaFilter } from 'react-icons/fa'; // Import icon
+import Slider from 'react-input-slider'; // Import range slider component
+import Form1 from './Form1';
 const FlightResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const results = location.state?.results || [];
+    
     const [filteredResults, setFilteredResults] = useState(results);
     const [filters, setFilters] = useState({
         minPrice: 0,
@@ -19,16 +19,35 @@ const FlightResults = () => {
         departureTime: ''
     });
 
+    // Determine the min and max price from API results
+    useEffect(() => {
+        if (results.length > 0) {
+            const allPrices = results.map(flight => flight.totalPriceList[0]?.fd.ADULT?.fC?.TF || 0);
+            const min = Math.min(...allPrices);
+            const max = Math.max(...allPrices);
+
+            // Initialize filter with dynamic values
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                minPrice: min,
+                maxPrice: max
+            }));
+        }
+    }, [results]);
+
     const airlines = [...new Set(results.flatMap(flight =>
         flight.sI.map(segment => segment.fD.aI.code)
     ))];
 
     useEffect(() => {
+        console.log("Filters Updated:", filters); // Debugging: Log the filters state
         filterFlights();
     }, [filters]);
 
     const filterFlights = () => {
         let filtered = results;
+
+        console.log("Filtering flights with the following filters:", filters); // Debugging: Log filter criteria
 
         filtered = filtered.filter(flight => {
             const totalPrice = flight.totalPriceList[0]?.fd.ADULT?.fC?.TF || 0;
@@ -50,6 +69,7 @@ const FlightResults = () => {
         }
 
         setFilteredResults(filtered);
+        console.log("Filtered Results:", filtered); // Debugging: Log filtered results
     };
 
     const handleBooking = (flight) => {
@@ -64,127 +84,132 @@ const FlightResults = () => {
         }));
     };
 
+    const handleSliderChange = (value) => {
+        console.log("Slider Change - New Value:", value); // Debugging: Log slider value
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            minPrice: value.min,
+            maxPrice: value.max
+        }));
+    };
+
     return (
-        <div className="flight-results-container d-flex">
-            <div className="form-section mb-4">
-        <Form1/>
+        <div>
+           <div style={{ backgroundImage: 'linear-gradient(0deg, #15457b, #051423)' }}>
+  <Form1 />
+</div>
+            <div className="d-flex">
+                {/* Sidebar */}
+                <div className="sidebar" style={sidebarStyles}>
+                    <h4 className="sidebar-title">
+                        <FaFilter /> Filters
+                    </h4>
 
-      </div>
-          
-
-            <div className="sidebar" style={sidebarStyles}>
-                <h4 className="sidebar-title">
-                    <FaFilter /> Filters
-                </h4>
-                
-                {/* Price Filter */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Price Range</Form.Label>
-                    <div className="d-flex">
-                        <Form.Control
-                            type="number"
-                            name="minPrice"
-                            value={filters.minPrice}
-                            onChange={handleFilterChange}
-                            placeholder="Min Price"
-                            className="mr-2"
+                    {/* Price Range Filter */}
+                    <Form.Group className="mb-3">
+                        <Form.Label>Price Range (₹)</Form.Label>
+                        <Slider
+                            axis="x"
+                            x={{ min: filters.minPrice, max: filters.maxPrice }}
+                            xmin={0}
+                            xmax={10000}
+                            xstep={10}
+                            onChange={handleSliderChange}
+                            styles={{
+                                track: {
+                                    backgroundColor: '#ddd',
+                                    height: '6px',
+                                },
+                                active: {
+                                    backgroundColor: '#007bff',
+                                },
+                                thumb: {
+                                    backgroundColor: '#007bff',
+                                    borderRadius: '50%',
+                                    width: '20px',
+                                    height: '20px',
+                                },
+                            }}
                         />
+                        <div className="d-flex justify-content-between mt-2">
+                            <span>₹{filters.minPrice}</span>
+                            <span>₹{filters.maxPrice}</span>
+                        </div>
+                    </Form.Group>
+
+                                
+                    {/* Airline Filter */}
+                    <Form.Group className="mb-3">
+                        <Form.Label>Airline</Form.Label>
                         <Form.Control
-                            type="number"
-                            name="maxPrice"
-                            value={filters.maxPrice}
+                            as="select"
+                            name="airline"
+                            value={filters.airline}
                             onChange={handleFilterChange}
-                            placeholder="Max Price"
-                        />
-                    </div>
-                </Form.Group>
-
-                {/* Airline Filter */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Airline</Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="airline"
-                        value={filters.airline}
-                        onChange={handleFilterChange}
-                    >
-                        <option value="">All Airlines</option>
-                        {airlines.map((airlineCode, index) => {
-                            const airlineName = results
-                                .flatMap(flight => flight.sI)
-                                .find(segment => segment.fD.aI.code === airlineCode)?.fD.aI.name;
-                            return (
-                                <option key={index} value={airlineCode}>
-                                    {airlineName} ({airlineCode})
-                                </option>
-                            );
-                        })}
-                    </Form.Control>
-                </Form.Group>
-
-                {/* Duration Filter */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Duration (minutes)</Form.Label>
-                    <div className="d-flex">
+                        >
+                            <option value="">All Airlines</option>
+                            {airlines.map((airlineCode, index) => {
+                                const airlineName = results
+                                    .flatMap(flight => flight.sI)
+                                    .find(segment => segment.fD.aI.code === airlineCode)?.fD.aI.name;
+                                return (
+                                    <option key={index} value={airlineCode}>
+                                        {airlineName} ({airlineCode})
+                                    </option>
+                                );
+                            })}
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>stops</Form.Label>
                         <Form.Control
-                            type="number"
-                            name="minDuration"
-                            value={filters.minDuration}
+                            as="select"
+                            name="airline"
+                            value={filters.airline}
                             onChange={handleFilterChange}
-                            placeholder="Min Duration"
-                            className="mr-2"
-                        />
-                        <Form.Control
-                            type="number"
-                            name="maxDuration"
-                            value={filters.maxDuration}
-                            onChange={handleFilterChange}
-                            placeholder="Max Duration"
-                        />
-                    </div>
-                </Form.Group>
+                        >
+                            <option value="">All Airlines</option>
+                            {airlines.map((airlineCode, index) => {
+                                const airlineName = results
+                                    .flatMap(flight => flight.sI)
+                                    .find(segment => segment.fD.aI.code === airlineCode)?.fD.aI.name;
+                                return (
+                                    <option key={index} value={airlineCode}>
+                                        {airlineName} ({airlineCode})
+                                    </option>
+                                );
+                            })}
+                        </Form.Control>
+                    </Form.Group>
+                </div>
 
-                {/* Departure Time Filter */}
-                <Form.Group className="mb-3">
-                    <Form.Label>Departure Time</Form.Label>
-                    <Form.Control
-                        type="time"
-                        name="departureTime"
-                        value={filters.departureTime}
-                        onChange={handleFilterChange}
-                    />
-                </Form.Group>
-            </div>
-
-            <div className="flight-list" style={{ flex: 1 }}>
-                <Row className="g-4">
-                    {filteredResults.length > 0 ? (
-                        filteredResults.map((flight, index) => (
-                            flight.sI.map((segment, segmentIndex) => (
-                                <Col key={`${index}-${segmentIndex}`} xs={12}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Title>{segment.fD.aI.name} ({segment.fD.aI.code})</Card.Title>
-                                            <Card.Text><strong>Flight Number:</strong> {segment.fD.fN}</Card.Text>
-                                            <Card.Text><strong>Aircraft:</strong> {segment.fD.eT}</Card.Text>
-                                            <Card.Text><strong>Departure:</strong> {segment.da.city} ({segment.da.code})</Card.Text>
-                                            <Card.Text><strong>Arrival:</strong> {segment.aa.city} ({segment.aa.code})</Card.Text>
-                                            <Card.Text><strong>Departure Time:</strong> {new Date(segment.dt).toLocaleString()}</Card.Text>
-                                            <Card.Text><strong>Arrival Time:</strong> {new Date(segment.at).toLocaleString()}</Card.Text>
-                                            <Card.Text><strong>Duration:</strong> {segment.duration} minutes</Card.Text>
-                                            <Card.Text><strong>Total Price:</strong> ₹{flight.totalPriceList[0]?.fd.ADULT?.fC?.TF || 'N/A'}</Card.Text>
-                                            <Button variant="primary" onClick={() => handleBooking(flight)}>
-                                                Book Now
-                                            </Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
+                {/* Flight List */}
+                <div className="flight-list" style={{ flex: 1 }}>
+                    <Row className="g-4">
+                        {filteredResults.length > 0 ? (
+                            filteredResults.map((flight, index) => (
+                                flight.sI.map((segment, segmentIndex) => (
+                                    <Col key={`${index}-${segmentIndex}`} xs={12}>
+                                        <Card>
+                                            <Card.Body>
+                                                <Card.Title>{segment.fD.aI.name} ({segment.fD.aI.code})</Card.Title>
+                                                <Card.Text><strong>Flight Number:</strong> {segment.fD.fN}</Card.Text>
+                                                <Card.Text><strong>Departure:</strong> {segment.da.city} ({segment.da.code})</Card.Text>
+                                                <Card.Text><strong>Arrival:</strong> {segment.aa.city} ({segment.aa.code})</Card.Text>
+                                                <Card.Text><strong>Price:</strong> ₹{flight.totalPriceList[0]?.fd.ADULT?.fC?.TF || 'N/A'}</Card.Text>
+                                                <Button variant="primary" onClick={() => handleBooking(flight)}>
+                                                    Book Now
+                                                </Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                ))
                             ))
-                        ))
-                    ) : (
-                        <p>No flights found.</p>
-                    )}
-                </Row>
+                        ) : (
+                            <p>No flights found.</p>
+                        )}
+                    </Row>
+                </div>
             </div>
         </div>
     );

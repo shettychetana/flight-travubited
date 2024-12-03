@@ -1,0 +1,8 @@
+.blog-boxed-container {
+    max-width: 1140px; /* Set the maximum width */
+    margin: 0 auto; /* Center it horizontally */
+    padding: 0 15px; /* Ensure some padding for mobile responsiveness */
+    border: 1px solid #ddd; /* Optional: Add a border to see the box visually */
+    background-color: #f9f9f9; /* Optional: Add background to highlight the boxed effect */
+  }
+  
