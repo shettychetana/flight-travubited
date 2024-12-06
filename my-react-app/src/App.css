@@ -664,7 +664,7 @@ button[type="submit"]:hover {
 
 .flight-search-form {
     width: 100%;
-    max-width: 800px;
+    max-width: 90%;
     background-color: #fff;
     border-radius: 10px;
     padding: 30px;
@@ -709,7 +709,7 @@ button:disabled {
 .radio-button {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0px;
 }
 
 .radio-button input {
