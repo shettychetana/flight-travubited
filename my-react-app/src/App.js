@@ -19,7 +19,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import ReviewPage from './components/ReviewPage';
 // Helper component to conditionally wrap non-routing components
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -56,6 +56,7 @@ const App = () => {
             
             <Route path="/results" element={<FlightResults />} />
             <Route path="/booking" element={<BookingPage />} />
+            <Route path="/review" element={<ReviewPage />} />
 
                 {/* Routes with Layout */}
                 <Route
