@@ -261,3 +261,28 @@
 // };
 
 // export default FlightResults;
+{/* <div class="col1" >
+    <div class="nested-grid">
+      <div class="nested-col1"><strong>Fare Summary</strong></div>
+      <div class="nested-col2">Nested Column 2</div>
+    </div>
+    <div class="nested-grid">
+      <div class="nested-col1">Fare Type</div>
+      <div class="nested-col2">Nested Column 2</div>
+    </div>
+    <div class="nested-grid">
+      <div class="nested-col1">Base Fare</div>
+      <div class="nested-col2">Nested Column 2</div>
+    </div>
+    <div class="nested-grid">
+      <div class="nested-col1">Taxes & Fees</div>
+      <div class="nested-col2">Nested Column 2</div>
+    </div>
+    <div class="nested-grid"  style={{borderTop: "1px solid grey"}}>
+      <div class="nested-col1">Total Amount</div>
+      <div class="nested-col2">Nested Column 2</div>
+    </div>
+  </div>
+  
+
+  <div class="grid-item">Column 2</div> */}

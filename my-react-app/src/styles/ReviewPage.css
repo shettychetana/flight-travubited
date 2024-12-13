@@ -1,0 +1,196 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* First column is 1 fraction, second column is 2 fractions */
+    gap: 10px; /* Optional: Add some spacing between columns */
+    width: 100%; /* Ensure the container takes up the available width */
+  }
+  
+  .grid-item {
+    background-color: rgb(255, 255, 255); /* Optional: Background color for visualization */
+    padding: 20px; /* Optional: Padding inside each grid item */
+    text-align: center; /* Optional: Center text */
+    border: 1px solid #f8f8f8; /* Optional: Border for visualization */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* First column is 1 fraction, second column is 2 fractions */
+    grid-template-rows: repeat(4, 1fr); /* Four equal rows for the first column */
+    gap: 10px; 
+    height: 100vh; /* Full viewport height for visualization */
+  }
+  
+  .col1 {
+    grid-column: 1;
+    grid-row: 1; 
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+  }
+  
+  .nested-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 5px; 
+  }
+  
+  .nested-col1,
+  .nested-col2 {
+    background-color: rgb(255, 254, 254); 
+    padding: 10px;
+    
+    text-align: center;
+  }
+  
+  .col1-row2 {
+    grid-column: 1;
+    grid-row: 2; 
+  }
+  
+  .col1-row3 {
+    grid-column: 1;
+    grid-row: 3; 
+  }
+  
+  .col1-row4 {
+    grid-column: 1;
+    grid-row: 4; 
+  }
+  
+  .col2 {
+    grid-column: 2; 
+    grid-row: span 4; 
+    background-color: lightblue; 
+  }
+  
+  .grid-container > div {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  .review-container {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+.flight-details {
+    flex: 2;
+}
+
+.price-summary {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.flight-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.flight-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.flight-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.airline-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.airline-logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.flight-time {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.duration {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}
+
+.refundable-badge {
+    background-color: #e6f5e6;
+    color: #27ae60;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.price-row.total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.promo-code {
+    background-color: #e6f7ff;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.clear-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.continue-button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}

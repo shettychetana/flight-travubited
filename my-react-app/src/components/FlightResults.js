@@ -338,9 +338,10 @@ const FlightResults = ({ segment, index }) => {
                                                 <strong>₹{flight.totalPriceList[0]?.fd.ADULT?.fC?.TF.toFixed(2)}</strong>
                                                 <p>per adult</p>
                                             </div>
-                                            
+                                           
                                             
                                         </Col>
+                                        {/* console.log({flight.totalPriceList[0]?.fd.ADULT?.fC?.TF.toFixed(2)}); */}
                                         <Col xs={2} className="text-end">
                                         <Button
   className="book-now-button"
