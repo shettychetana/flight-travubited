@@ -1,0 +1,44 @@
+/* Good to Know Container */
+.good-to-know {
+    border: 1px solid #d0e0d0;
+    border-radius: 5px;
+    background-color: #f0fff0; /* Light green background */
+    color: #333;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Section */
+  .good-to-know-header {
+    background-color: #e1f8e1; /* Header light green */
+    border-bottom: 1px solid #d0e0d0;
+    color: #2c662d; /* Dark green for text */
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /* Subtitle Styling */
+  .good-to-know-subtitle {
+    font-size: 12px;
+    color: #555;
+    margin: 0;
+  }
+  
+  /* Thumbs Up Icon */
+  .good-to-know-icon {
+    color: #2c662d;
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  /* List Styling */
+  .good-to-know-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  
+  .good-to-know-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  

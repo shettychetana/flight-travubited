@@ -1,0 +1,67 @@
+/* Container styling */
+.flight-loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    background-color: #f0f2f5;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Flight Animation Container */
+  .flight-animation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  
+  /* Circular Dots Animation */
+  .circle-dots {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px dashed #00a6ff;
+    animation: rotateCircle 1.5s linear infinite;
+  }
+  
+  /* Plane Icon */
+  .plane-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    color: #00a6ff;
+    transform: translate(-50%, -50%);
+    animation: rotatePlane 1.5s linear infinite;
+  }
+  
+  /* Loading Text */
+  .flight-loader-container p {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Circle Rotation */
+  @keyframes rotateCircle {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Plane Rotation */
+  @keyframes rotatePlane {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
