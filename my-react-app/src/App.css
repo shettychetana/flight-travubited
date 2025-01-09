@@ -202,11 +202,11 @@ h2 {
 
 label {
     display: inline-block;
-    width: 150px;  /* Adjust width as per your design */
+     /* Adjust width as per your design */
     margin-right: 10px; /* Space between label and input */
     font-weight: bold;
     font-size: 16px;
-    text-align: right;
+    text-align: left;
 }
 
 input,

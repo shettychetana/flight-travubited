@@ -4,9 +4,9 @@ import { Container } from "react-bootstrap";
 
 const partners = [
   { src: "images/Fly Emirates.png", alt: "Fly Emirates" },
-  { src: "images/Alaska Airlines.png", alt: "Alaska Airlines" },
+  { src: "images/1.png", alt: "Alaska Airlines" },
   { src: "images/2.png", alt: "Airbnb" },
-  { src: "images/2.png", alt: "Turkish Airlines" },
+ 
   { src: "images/3.png", alt: "Swiss" },
   { src: "images/4.png", alt: "Swiss" },
   { src: "images/5.png", alt: "Swiss" },
@@ -54,7 +54,7 @@ const LogoCarousel = () => {
                 src={partner.src}
                 alt={partner.alt}
                 className="img-fluid mx-auto"
-                style={{ maxWidth: "100px" }}
+                style={{ maxWidth: "200px" }}
               />
             </div>
           ))}
