@@ -194,7 +194,7 @@ const Header = () => {
                 Holiday
               </Button>
               <Button color="inherit" style={{backgroundColor:"#ff7043",color:"white"}}>Contact</Button>
-              <Button color="inherit" style={{backgroundColor:"#ff7043",color:"white"}}>Help</Button>
+              
               {/* <Button color="inherit">Sign Up</Button> */}
               {/* <Button
                 variant="outlined"

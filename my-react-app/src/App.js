@@ -20,6 +20,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReviewPage from './components/ReviewPage';
+import Formofsecond from './components/Formofsecond';
 // Helper component to conditionally wrap non-routing components
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -31,6 +32,7 @@ const Layout = ({ children }) => {
         <>
             {!shouldHideLayout && <Header />}
             {children}
+            <Formofsecond />
             {!shouldHideLayout && (
                 <>
                     <LogoCarousel />

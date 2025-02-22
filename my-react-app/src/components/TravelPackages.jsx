@@ -8,7 +8,7 @@ const allPackages = {
       img: "images/sydeny1.png",
       duration: "10 days, 9 Night",
       price: "$2181/person",
-      title: "breathtaking landscapes await",
+      title: "breathtaking landscapes await here",
       location: "Sydney, Australia",
     },
     {

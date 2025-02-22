@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form  } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FlightLoader from "../components/FlightLoader";
+import FlightLoader from "./FlightLoader";
 import goodtoknow from "../styles/goodtoknow.css";
 
 
