@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import FlightSearchForm from './components/FlightSearchForm';
+//import FlightSearchForm from './components/FlightSearchForm';
 import FlightResults from './components/FlightResults';
 import BookingPage from './components/BookingPage'; // Import your BookingPage component
 import './App.css';
@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
         <>
             {!shouldHideLayout && <Header />}
             {children}
-            <Formofsecond />
+            
             {!shouldHideLayout && (
                 <>
                     <LogoCarousel />
@@ -65,7 +65,7 @@ const App = () => {
                     path="/"
                     element={
                         <Layout>
-                            <FlightSearchForm />
+                            <Formofsecond />
                         </Layout>
                     }
                 />
