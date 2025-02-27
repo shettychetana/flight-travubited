@@ -1,54 +1,83 @@
 /* Statistics Container */
 .statistics-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px 20px;
-    background-color: #f8f9fa;
-  }
-  
-  /* Card Styles */
+  display: flex;
+  flex-wrap: wrap; /* Responsive */
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+}
+
+/* Card Styles */
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 180px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon Styles */
+.icon-container {
+  background-color: #ffcccb;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+}
+
+.icon-container i {
+  font-size: 24px;
+  color: #f76c00;
+}
+
+/* Number and Label Styles */
+.stat-card h3 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.stat-card p {
+  font-size: 14px;
+  margin: 5px 0 0;
+  color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .stat-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
     width: 150px;
-    transition: transform 0.3s ease-in-out;
   }
-  
-  .stat-card:hover {
-    transform: translateY(-5px);
+}
+
+@media (max-width: 480px) {
+  .statistics-container {
+    gap: 15px;
+    padding: 30px 10px;
   }
-  
-  /* Icon Styles */
+
+  .stat-card {
+    width: 140px;
+    padding: 15px;
+  }
+
   .icon-container {
-    background-color: #ffcccb;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 15px;
+    width: 50px;
+    height: 50px;
   }
-  
+
   .icon-container i {
-    font-size: 24px;
-    color: #f76c00;
+    font-size: 20px;
   }
-  
-  /* Number and Label Styles */
-  .stat-card h3 {
-    font-size: 24px;
-    margin: 0;
-    color: #333;
-  }
-  
-  .stat-card p {
-    font-size: 14px;
-    margin: 5px 0 0;
-    color: #6c757d;
-  }
-  
+}
