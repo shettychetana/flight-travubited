@@ -21,6 +21,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReviewPage from './components/ReviewPage';
 import Formofsecond from './components/Formofsecond';
+import FlightList from './components/FlightList';
 // Helper component to conditionally wrap non-routing components
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -59,6 +60,7 @@ const App = () => {
             <Route path="/results" element={<FlightResults />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/review" element={<ReviewPage />} />
+            <Route path='/flight-list' element={<FlightList />} />
 
                 {/* Routes with Layout */}
                 <Route
