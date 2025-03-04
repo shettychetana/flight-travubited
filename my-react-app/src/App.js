@@ -45,9 +45,10 @@ const Layout = ({ children }) => {
                     <BlogSection />
  {/* <Reviews /> */}
                     <Statistics />
-                    <Footer />
+                   
                 </>
             )}
+             <Footer />
         </>
     );
 };

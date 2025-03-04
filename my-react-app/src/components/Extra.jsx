@@ -2543,3 +2543,171 @@ export default ReviewPage;
 // };
 
 // export default Formofsecond;
+
+
+
+
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Slider,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+import moment from "moment";
+
+const FlightList = () => {
+  const location = useLocation();
+  const [flights, setFlights] = useState([]);
+  const [filteredFlights, setFilteredFlights] = useState([]);
+  const [selectedStops, setSelectedStops] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState([0, 10000]);
+  const [selectedDepartureTime, setSelectedDepartureTime] = useState([]);
+  const [selectedArrivalTime, setSelectedArrivalTime] = useState([]);
+  const [selectedAirline, setSelectedAirline] = useState("");
+  const [airlineList, setAirlineList] = useState([]);
+
+  // Time Slots
+  const timeSlots = [
+    { label: "00-06", start: "00:00", end: "06:00" },
+    { label: "06-12", start: "06:00", end: "12:00" },
+    { label: "12-18", start: "12:00", end: "18:00" },
+    { label: "18-00", start: "18:00", end: "23:59" },
+  ];
+
+  useEffect(() => {
+    if (location.state?.flights?.searchResult?.tripInfos?.ONWARD) {
+      const onwardFlights = location.state.flights.searchResult.tripInfos.ONWARD;
+      setFlights(onwardFlights);
+      setFilteredFlights(onwardFlights);
+
+      // Set Min-Max Price
+      const prices = onwardFlights.map(f => f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0);
+      setSelectedPrice([Math.min(...prices), Math.max(...prices)]);
+
+      // Extract unique airlines
+      const airlines = [...new Set(onwardFlights.map(f => f.sI[0]?.fD?.aI?.name))].filter(Boolean);
+      setAirlineList(airlines);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    let filtered = flights;
+
+    if (selectedStops !== "") {
+      filtered = filtered.filter(f => f.sI[0]?.stops == parseInt(selectedStops));
+    }
+
+    filtered = filtered.filter(f => {
+      const flightPrice = f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0;
+      return flightPrice >= selectedPrice[0] && flightPrice <= selectedPrice[1];
+    });
+
+    if (selectedDepartureTime.length > 0) {
+      filtered = filtered.filter(f => {
+        const departureTime = moment(f.sI[0]?.dt).format("HH:mm");
+        return selectedDepartureTime.some(slot => {
+          const { start, end } = timeSlots.find(t => t.label === slot);
+          return departureTime >= start && departureTime <= end;
+        });
+      });
+    }
+
+    if (selectedArrivalTime.length > 0) {
+      filtered = filtered.filter(f => {
+        const arrivalTime = moment(f.sI[0]?.at).format("HH:mm");
+        return selectedArrivalTime.some(slot => {
+          const { start, end } = timeSlots.find(t => t.label === slot);
+          return arrivalTime >= start && arrivalTime <= end;
+        });
+      });
+    }
+
+    if (selectedAirline) {
+      filtered = filtered.filter(f => f.sI[0]?.fD?.aI?.name === selectedAirline);
+    }
+
+    setFilteredFlights(filtered);
+  }, [selectedStops, selectedPrice, selectedDepartureTime, selectedArrivalTime, selectedAirline]);
+
+  return (
+    <Grid container spacing={3} padding={3}>
+      <Grid item xs={12} md={4}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" gutterBottom>Filter Options</Typography>
+
+            {/* Stops Filter */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Stops</InputLabel>
+              <Select value={selectedStops} onChange={(e) => setSelectedStops(e.target.value)}>
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="0">Direct</MenuItem>
+                <MenuItem value="1">1 Stop</MenuItem>
+                <MenuItem value="2">2 Stops</MenuItem>
+                <MenuItem value="3">3+ Stops</MenuItem>
+              </Select>
+            </FormControl>
+
+            {/* Airline Filter */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Airline</InputLabel>
+              <Select value={selectedAirline} onChange={(e) => setSelectedAirline(e.target.value)}>
+                <MenuItem value="">All</MenuItem>
+                {airlineList.map((airline, index) => (
+                  <MenuItem key={index} value={airline}>{airline}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* Price Filter */}
+            <Typography gutterBottom>Price Range (₹{selectedPrice[0]} - ₹{selectedPrice[1]})</Typography>
+            <Slider
+              value={selectedPrice}
+              onChange={(e, newValue) => setSelectedPrice(newValue)}
+              valueLabelDisplay="auto"
+              min={0}
+              max={10000}
+              step={100}
+            />
+
+            {/* Departure Time Filter */}
+            <Typography gutterBottom>Departure From Bengaluru</Typography>
+            <ToggleButtonGroup
+              value={selectedDepartureTime}
+              onChange={(e, newTimes) => setSelectedDepartureTime(newTimes)}
+              aria-label="departure time"
+            >
+              {timeSlots.map(slot => (
+                <ToggleButton key={slot.label} value={slot.label}>{slot.label}</ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+
+            {/* Arrival Time Filter */}
+            <Typography gutterBottom>Arrival At Delhi</Typography>
+            <ToggleButtonGroup
+              value={selectedArrivalTime}
+              onChange={(e, newTimes) => setSelectedArrivalTime(newTimes)}
+              aria-label="arrival time"
+            >
+              {timeSlots.map(slot => (
+                <ToggleButton key={slot.label} value={slot.label}>{slot.label}</ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
+};
+
+export default FlightList;

@@ -1,162 +1,408 @@
 
 // import React, { useEffect, useState } from "react";
 // import { useLocation } from "react-router-dom";
-// import { Grid, Card, CardContent, Typography, Button } from "@mui/material";
+// import {
+//   Grid,
+//   Card,
+//   CardContent,
+//   Typography,
+//   Button,
+//   FormControl,
+//   InputLabel,
+//   Select,
+//   MenuItem,
+//   Slider,
+//   ToggleButton,
+//   ToggleButtonGroup,
+// } from "@mui/material";
+// import { WbSunny, NightsStay, Brightness5, Brightness6 } from "@mui/icons-material";
+// import moment from "moment";
+// import FlightCard from "../components/FlightCard";
+// const timeSlots = [
+//   { label: "00-06", start: "00:00", end: "06:00", icon: <Brightness5 /> },
+//   { label: "06-12", start: "06:00", end: "12:00", icon: <WbSunny /> },
+//   { label: "12-18", start: "12:00", end: "18:00", icon: <Brightness6 /> },
+//   { label: "18-00", start: "18:00", end: "23:59", icon: <NightsStay /> },
+// ];
 
 // const FlightList = () => {
 //   const location = useLocation();
 //   const [flights, setFlights] = useState([]);
+//   const [filteredFlights, setFilteredFlights] = useState([]);
+//   const [selectedStops, setSelectedStops] = useState("");
+//   const [selectedPrice, setSelectedPrice] = useState([0, 10000]);
+//   const [selectedDepartureTime, setSelectedDepartureTime] = useState([]);
+//   const [selectedArrivalTime, setSelectedArrivalTime] = useState([]);
+//   const [selectedAirline, setSelectedAirline] = useState("");
+//   const [airlines, setAirlines] = useState([]);
 
 //   useEffect(() => {
-//     console.log("Location State:", location.state); // Debugging
-
 //     if (location.state?.flights?.searchResult?.tripInfos?.ONWARD) {
-//       const onwardFlights = location.state?.flights.searchResult.tripInfos.ONWARD; // Extracting the array
+//       const onwardFlights = location.state.flights.searchResult.tripInfos.ONWARD;
 //       setFlights(onwardFlights);
-//     } else {
-//       setFlights([]); // Fallback to an empty array
+//       setFilteredFlights(onwardFlights);
+
+//       const prices = onwardFlights.map(f => f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0);
+//       setSelectedPrice([Math.min(...prices), Math.max(...prices)]);
+
+//       // Extract unique airlines
+//       const airlineNames = [...new Set(onwardFlights.map(f => f?.sI?.[0]?.fD?.aI?.name || "Unknown Airline"))];
+//       setAirlines(airlineNames);
 //     }
 //   }, [location.state]);
 
-//   if (!flights || flights.length === 0) {
-//     return <Typography variant="h6">No flights available.</Typography>;
-//   }
+//   useEffect(() => {
+//     let filtered = flights;
+
+//     if (selectedStops !== "") {
+//       filtered = filtered.filter(f => f.sI[0]?.stops == parseInt(selectedStops));
+//     }
+
+//     if (selectedAirline !== "") {
+//       filtered = filtered.filter(f => f.sI[0]?.fD?.aI?.name === selectedAirline);
+//     }
+
+//     filtered = filtered.filter(f => {
+//       const flightPrice = f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0;
+//       return flightPrice >= selectedPrice[0] && flightPrice <= selectedPrice[1];
+//     });
+
+//     if (selectedDepartureTime.length > 0) {
+//       filtered = filtered.filter(f => {
+//         const departureTime = moment(f.sI[0]?.dt).format("HH:mm");
+//         return selectedDepartureTime.some(slot => {
+//           const { start, end } = timeSlots.find(t => t.label === slot);
+//           return departureTime >= start && departureTime <= end;
+//         });
+//       });
+//     }
+
+//     if (selectedArrivalTime.length > 0) {
+//       filtered = filtered.filter(f => {
+//         const arrivalTime = moment(f.sI[0]?.at).format("HH:mm");
+//         return selectedArrivalTime.some(slot => {
+//           const { start, end } = timeSlots.find(t => t.label === slot);
+//           return arrivalTime >= start && arrivalTime <= end;
+//         });
+//       });
+//     }
+
+//     setFilteredFlights(filtered);
+//   }, [selectedStops, selectedPrice, selectedDepartureTime, selectedArrivalTime, selectedAirline]);
 
 //   return (
 //     <Grid container spacing={3} padding={3}>
-//       {flights.map((flight, index) => (
-//         <Grid item xs={12} md={8} key={index}>
-//           <Card variant="outlined">
-//             <CardContent>
-//               <Grid container spacing={2}>
-//                 {/* Flight Details (2fr) */}
-//                 <Grid item xs={8}>
-//                   <Typography variant="h6">
-//                     {flight?.sI?.[0]?.fD?.aI?.name} ({flight?.sI?.[0]?.fD?.aI?.code})
-//                   </Typography>
-//                   <Typography>Flight Number: {flight?.sI?.[0]?.fD?.fN}</Typography>
-//                   <Typography>Departure: {flight?.sI?.[0]?.dt}</Typography>
-//                   <Typography>Arrival: {flight?.sI?.[0]?.at}</Typography>
-//                   <Typography>Duration: {flight?.sI?.[0]?.duration} min</Typography>
-//                   <Typography>Stops: {flight?.sI?.[0]?.stops}</Typography>
-//                 </Grid>
+//       <Grid item xs={12} md={4}>
+//         <Card variant="outlined">
+//           <CardContent>
+//             <Typography variant="h6" gutterBottom>Filter Options</Typography>
 
-//                 {/* Price and Book Button (1fr) */}
-//                 <Grid item xs={4} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-//                   <Typography variant="h6" color="primary">
-//                     ₹{flight?.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF}
-//                   </Typography>
-//                   <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-//                     Book Now
-//                   </Button>
-//                 </Grid>
-//               </Grid>
-//             </CardContent>
-//           </Card>
-//         </Grid>
-//       ))}
+//             {/* Airline Filter */}
+//             <FormControl fullWidth margin="normal">
+//               <InputLabel>Airline</InputLabel>
+//               <Select value={selectedAirline} onChange={(e) => setSelectedAirline(e.target.value)}>
+//                 <MenuItem value="">All Airlines</MenuItem>
+//                 {airlines.map((airline, index) => (
+//                   <MenuItem key={index} value={airline}>{airline}</MenuItem>
+//                 ))}
+//               </Select>
+//             </FormControl>
+
+//             {/* Stops Filter */}
+//             <FormControl fullWidth margin="normal">
+//               <InputLabel>Stops</InputLabel>
+//               <Select value={selectedStops} onChange={(e) => setSelectedStops(e.target.value)}>
+//                 <MenuItem value="">All</MenuItem>
+//                 <MenuItem value="0">Direct</MenuItem>
+//                 <MenuItem value="1">1 Stop</MenuItem>
+//                 <MenuItem value="2">2 Stops</MenuItem>
+//                 <MenuItem value="3">3+ Stops</MenuItem>
+//               </Select>
+//             </FormControl>
+
+//             {/* Price Filter */}
+//             <Typography gutterBottom>Price Range (₹{selectedPrice[0]} - ₹{selectedPrice[1]})</Typography>
+//             <Slider
+//               value={selectedPrice}
+//               onChange={(e, newValue) => setSelectedPrice(newValue)}
+//               valueLabelDisplay="auto"
+//               min={0}
+//               max={10000}
+//               step={100}
+//             />
+
+//             {/* Departure Time Filter */}
+//             <Typography gutterBottom>Departure Time</Typography>
+//             <ToggleButtonGroup
+//               value={selectedDepartureTime}
+//               onChange={(e, newTimes) => setSelectedDepartureTime(newTimes)}
+//               aria-label="departure time"
+//             >
+//               {timeSlots.map(slot => (
+//                 <ToggleButton key={slot.label} value={slot.label} sx={{ color: "#FF6748" }}>
+//                   {slot.icon} {slot.label}
+//                 </ToggleButton>
+//               ))}
+//             </ToggleButtonGroup>
+
+//             {/* Arrival Time Filter */}
+//             <Typography gutterBottom>Arrival Time</Typography>
+//             <ToggleButtonGroup
+//               value={selectedArrivalTime}
+//               onChange={(e, newTimes) => setSelectedArrivalTime(newTimes)}
+//               aria-label="arrival time"
+//             >
+//               {timeSlots.map(slot => (
+//                 <ToggleButton key={slot.label} value={slot.label} sx={{ color: "#FF6748" }}>
+//                   {slot.icon} {slot.label}
+//                 </ToggleButton>
+//               ))}
+//             </ToggleButtonGroup>
+//           </CardContent>
+//         </Card>
+//       </Grid>
+
+//       {/* Flight List */}
+//       {/* <Grid item xs={12} md={8}>
+//         {filteredFlights.length === 0 ? (
+//           <Typography variant="h6" sx={{ textAlign: "center", mt: 5 }}>
+//             No flights available.
+//           </Typography>
+//         ) : (
+//           filteredFlights.map((flight, index) => (
+//             <Card variant="outlined" sx={{ mb: 2 }} key={index}>
+//               <CardContent>
+//                 <Typography variant="h6">{flight?.sI?.[0]?.fD?.aI?.name || "Unknown Airline"}</Typography>
+//                 <Typography>Departure: {moment(flight.sI[0]?.dt).format("DD MMM YYYY, hh:mm A")}</Typography>
+//                 <Typography>Arrival: {moment(flight.sI[0]?.at).format("DD MMM YYYY, hh:mm A")}</Typography>
+//                 <Typography>Price: ₹{flight?.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || "N/A"}</Typography>
+//                 <Button variant="contained" sx={{ mt: 2, backgroundColor: "#FF6748" }}>Book Now</Button>
+//               </CardContent>
+//             </Card>
+//           ))
+//         )
+        
+//         }
+//       </Grid> */}
+//       <Grid item xs={12} md={8}>
+//   {filteredFlights.length === 0 ? (
+//     <Typography variant="h6" sx={{ textAlign: "center", mt: 5 }}>
+//       No flights available.
+//     </Typography>
+//   ) : (
+//     filteredFlights.map((flight, index) => <FlightCard key={index} flight={flight} />)
+//   )}
+// </Grid>
+
 //     </Grid>
 //   );
 // };
 
 // export default FlightList;
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Grid, Card, CardContent, Typography, Button, Box } from "@mui/material";
-import moment from "moment"; // For date formatting
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Slider,
+  ToggleButton,
+  ToggleButtonGroup,
+  Tabs,
+  Tab,
+  Box,
+} from "@mui/material";
+import { WbSunny, NightsStay, Brightness5, Brightness6 } from "@mui/icons-material";
+import moment from "moment";
+import FlightCard from "../components/FlightCard";
+
+const timeSlots = [
+  { label: "00-06", start: "00:00", end: "06:00", icon: <Brightness5 /> },
+  { label: "06-12", start: "06:00", end: "12:00", icon: <WbSunny /> },
+  { label: "12-18", start: "12:00", end: "18:00", icon: <Brightness6 /> },
+  { label: "18-00", start: "18:00", end: "23:59", icon: <NightsStay /> },
+];
 
 const FlightList = () => {
   const location = useLocation();
-  const [flights, setFlights] = useState([]);
+  const [flights, setFlights] = useState({});
+  const [filteredFlights, setFilteredFlights] = useState([]);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedStops, setSelectedStops] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState([0, 10000]);
+  const [selectedDepartureTime, setSelectedDepartureTime] = useState([]);
+  const [selectedArrivalTime, setSelectedArrivalTime] = useState([]);
+  const [selectedAirline, setSelectedAirline] = useState("");
+  const [airlines, setAirlines] = useState([]);
 
   useEffect(() => {
-    console.log("Location State:", location.state); // Debugging
+    if (location.state?.flights?.searchResult?.tripInfos) {
+      const tripInfos = location.state.flights.searchResult.tripInfos;
+      setFlights(tripInfos);
+      
+      // Extract the first available flight list for default filtering
+      const firstKey = Object.keys(tripInfos)[0];
+      setFilteredFlights(tripInfos[firstKey] || []);
 
-    if (location.state?.flights?.searchResult?.tripInfos?.ONWARD) {
-      const onwardFlights = location.state?.flights.searchResult.tripInfos.ONWARD;
-      setFlights(onwardFlights);
-    } else {
-      setFlights([]);
+      // Extract airline names
+      const allFlights = Object.values(tripInfos).flat();
+      const airlineNames = [...new Set(allFlights.map(f => f?.sI?.[0]?.fD?.aI?.name || "Unknown Airline"))];
+      setAirlines(airlineNames);
+
+      // Set default price range
+      const prices = allFlights.map(f => f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0);
+      setSelectedPrice([Math.min(...prices), Math.max(...prices)]);
     }
   }, [location.state]);
 
+  useEffect(() => {
+    let currentFlights = flights[Object.keys(flights)[selectedTab]] || [];
+
+    let filtered = currentFlights;
+
+    if (selectedStops !== "") {
+      filtered = filtered.filter(f => f.sI[0]?.stops === parseInt(selectedStops));
+    }
+
+    if (selectedAirline !== "") {
+      filtered = filtered.filter(f => f.sI[0]?.fD?.aI?.name === selectedAirline);
+    }
+
+    filtered = filtered.filter(f => {
+      const flightPrice = f.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || 0;
+      return flightPrice >= selectedPrice[0] && flightPrice <= selectedPrice[1];
+    });
+
+    if (selectedDepartureTime.length > 0) {
+      filtered = filtered.filter(f => {
+        const departureTime = moment(f.sI[0]?.dt).format("HH:mm");
+        return selectedDepartureTime.some(slot => {
+          const { start, end } = timeSlots.find(t => t.label === slot);
+          return departureTime >= start && departureTime <= end;
+        });
+      });
+    }
+
+    if (selectedArrivalTime.length > 0) {
+      filtered = filtered.filter(f => {
+        const arrivalTime = moment(f.sI[0]?.at).format("HH:mm");
+        return selectedArrivalTime.some(slot => {
+          const { start, end } = timeSlots.find(t => t.label === slot);
+          return arrivalTime >= start && arrivalTime <= end;
+        });
+      });
+    }
+
+    setFilteredFlights(filtered);
+  }, [selectedTab, selectedStops, selectedPrice, selectedDepartureTime, selectedArrivalTime, selectedAirline]);
+
+  const flightTabs = Object.keys(flights).map((key, index) => ({
+    key: key,
+    label: key === "ONWARD" ? "Onward" : key === "RETURN" ? "Return" : key === "COMBO" ? "Combo" : `Route ${index + 1}`,
+  }));
+
   return (
     <Grid container spacing={3} padding={3}>
-      {/* Left Section: Filter (1fr) */}
+      <Grid item xs={12}>
+        <Tabs value={selectedTab} onChange={(e, newValue) => setSelectedTab(newValue)} centered>
+          {flightTabs.map((tab, index) => (
+            <Tab key={index} label={tab.label} />
+          ))}
+        </Tabs>
+      </Grid>
+
+      {/* Filters */}
       <Grid item xs={12} md={4}>
         <Card variant="outlined">
           <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Filter Options
-            </Typography>
-            {/* Add filter components here (e.g., Price, Stops, Airlines, etc.) */}
-            <Typography>Price Range</Typography>
-            <Typography>Stops</Typography>
-            <Typography>Airlines</Typography>
-            <Typography>Departure Time</Typography>
+            <Typography variant="h6" gutterBottom>Filter Options</Typography>
+
+            {/* Airline Filter */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Airline</InputLabel>
+              <Select value={selectedAirline} onChange={(e) => setSelectedAirline(e.target.value)}>
+                <MenuItem value="">All Airlines</MenuItem>
+                {airlines.map((airline, index) => (
+                  <MenuItem key={index} value={airline}>{airline}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* Stops Filter */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Stops</InputLabel>
+              <Select value={selectedStops} onChange={(e) => setSelectedStops(e.target.value)}>
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="0">Direct</MenuItem>
+                <MenuItem value="1">1 Stop</MenuItem>
+                <MenuItem value="2">2 Stops</MenuItem>
+                <MenuItem value="3">3+ Stops</MenuItem>
+              </Select>
+            </FormControl>
+
+            {/* Price Filter */}
+            <Typography gutterBottom>Price Range (₹{selectedPrice[0]} - ₹{selectedPrice[1]})</Typography>
+            <Slider
+              value={selectedPrice}
+              onChange={(e, newValue) => setSelectedPrice(newValue)}
+              valueLabelDisplay="auto"
+              min={0}
+              max={10000}
+              step={100}
+            />
+
+            {/* Departure Time Filter */}
+            <Typography gutterBottom>Departure Time</Typography>
+            <ToggleButtonGroup
+              value={selectedDepartureTime}
+              onChange={(e, newTimes) => setSelectedDepartureTime(newTimes)}
+              aria-label="departure time"
+            >
+              {timeSlots.map(slot => (
+                <ToggleButton key={slot.label} value={slot.label} sx={{ color: "#FF6748" }}>
+                  {slot.icon} {slot.label}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+
+            {/* Arrival Time Filter */}
+            <Typography gutterBottom>Arrival Time</Typography>
+            <ToggleButtonGroup
+              value={selectedArrivalTime}
+              onChange={(e, newTimes) => setSelectedArrivalTime(newTimes)}
+              aria-label="arrival time"
+            >
+              {timeSlots.map(slot => (
+                <ToggleButton key={slot.label} value={slot.label} sx={{ color: "#FF6748" }}>
+                  {slot.icon} {slot.label}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           </CardContent>
         </Card>
       </Grid>
 
-      {/* Right Section: Flight List (2fr) */}
+      {/* Flight List */}
       <Grid item xs={12} md={8}>
-        {flights.length === 0 ? (
-          <Typography variant="h6" sx={{ textAlign: "center", mt: 5 }}>
-            No flights available.
-          </Typography>
+        {filteredFlights.length === 0 ? (
+          <Typography variant="h6" sx={{ textAlign: "center", mt: 5 }}>No flights available.</Typography>
         ) : (
-          flights.map((flight, index) => {
-            const airlineName = flight?.sI?.[0]?.fD?.aI?.name || "Unknown Airline";
-            const airlineCode = flight?.sI?.[0]?.fD?.aI?.code || "--";
-            const flightNumber = flight?.sI?.[0]?.fD?.fN || "--";
-            const departureTime = flight?.sI?.[0]?.dt
-              ? moment(flight.sI[0].dt).format("DD MMM YYYY, hh:mm A")
-              : "N/A";
-            const arrivalTime = flight?.sI?.[0]?.at
-              ? moment(flight.sI[0].at).format("DD MMM YYYY, hh:mm A")
-              : "N/A";
-            const duration = flight?.sI?.[0]?.duration || "N/A";
-            const stops = flight?.sI?.[0]?.stops ?? "Direct";
-            const price =
-              flight?.totalPriceList?.[0]?.fd?.ADULT?.fC?.NF || "Price Not Available";
-
-            return (
-              <Card variant="outlined" sx={{ mb: 2 }} key={index}>
-                <CardContent>
-                  <Grid container spacing={2}>
-                    {/* Flight Details (2fr) */}
-                    <Grid item xs={8}>
-                      <Typography variant="h6">
-                        {airlineName} ({airlineCode})
-                      </Typography>
-                      <Typography>Flight Number: {flightNumber}</Typography>
-                      <Typography>Departure: {departureTime}</Typography>
-                      <Typography>Arrival: {arrivalTime}</Typography>
-                      <Typography>Duration: {duration} min</Typography>
-                      <Typography>Stops: {stops}</Typography>
-                    </Grid>
-
-                    {/* Price and Book Button (1fr) */}
-                    <Grid
-                      item
-                      xs={4}
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Typography variant="h6" color="primary">
-                        ₹{price}
-                      </Typography>
-                      <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-                        Book Now
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </Card>
-            );
-          })
+          filteredFlights.map((flight, index) => <FlightCard key={index} flight={flight} />)
         )}
       </Grid>
     </Grid>
