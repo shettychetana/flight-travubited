@@ -23,6 +23,7 @@ import ReviewPage from './components/ReviewPage';
 import Formofsecond from './components/Formofsecond';
 import FlightList from './components/FlightList';
 import FlightItinerary from "./components/FlightItinerary";
+import BookingConfirmation from './components/BookingConfirmation';
 // Helper component to conditionally wrap non-routing components
 const Layout = ({ children }) => {
     const location = useLocation();
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/review" element={<ReviewPage />} />
             <Route path='/flight-list' element={<FlightList />} />
             <Route path="/flight-itinerary" element={<FlightItinerary />} />
+            <Route path="/booking-confirmation/:bookingId" element={<BookingConfirmation />} />
 
                 {/* Routes with Layout */}
                 <Route

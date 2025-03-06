@@ -19,6 +19,9 @@
 // export default FlightItinerary;
 import React from "react";
 import { useState } from "react";
+
+
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import {  Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Typography,Grid, Box, Paper,LinearProgress, Divider,Link, List,TextField, ListItem, ListItemText } from "@mui/material";
@@ -30,6 +33,7 @@ import LuggageIcon from "@mui/icons-material/Luggage";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { format,differenceInMinutes  } from "date-fns";
 const FlightItinerary = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const flightDetails = location.state?.flightDetails;
   console.log(flightDetails);
@@ -41,7 +45,11 @@ const FlightItinerary = () => {
   // Function to handle modal open/close
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+ 
+  const handleBooking = () => {
+    const bookingId = flightDetails?.bookingId || Math.floor(Math.random() * 1000000); // Generate a booking ID if not available
+    navigate(`/booking-confirmation/${bookingId}`, { state: { flightDetails } });
+  };
   // Extract refundable type values
   const refundableType = flightDetails.tripInfos[0].totalPriceList[0].fd;
 
@@ -140,7 +148,7 @@ const FlightItinerary = () => {
     
       
       <Typography variant="subtitle1" color="text.secondary">
-      {flightDetails.tripInfos[0].sI[0].aa.terminal} {Math.floor(duration / 60)}h {duration % 60}m
+ {Math.floor(duration / 60)}h {duration % 60}m
       </Typography>
 
       <Divider sx={{ my: 2 }} />
@@ -164,12 +172,12 @@ const FlightItinerary = () => {
           <Box>
             <Typography variant="h6">{formattedTimedep}</Typography>
             <Typography variant="body2" color="text.secondary">
-              {flightDetails.tripInfos[0].sI[0].da.city}, {flightDetails.tripInfos[0].sI[0].aa.terminal}
+              {flightDetails.tripInfos[0].sI[0].da.city} 
             </Typography>
           </Box>
         </Stack>
 
-        <Divider sx={{ my: 1, ml: 4, borderLeft: "2px dashed gray", height: 30 }} />
+        <Divider sx={{ my: 1, ml: 4, borderLeft: "2px dashed gray", height: 30 }} >{flightDetails.tripInfos[0].sI[0].da.terminal}{flightDetails.tripInfos[0].sI[0].aa.terminal}</Divider>
 
         <Stack direction="row" spacing={2} alignItems="center">
           <FlightLandIcon color="success" />
@@ -187,13 +195,13 @@ const FlightItinerary = () => {
         <Stack direction="row" spacing={2} alignItems="center">
           <LuggageIcon color="primary" />
           <Typography variant="body1">
-            <strong>Cabin Baggage:</strong> 7 Kgs / Adult
+            <strong>Cabin Baggage:</strong> {flightDetails.tripInfos[0].totalPriceList[0].fd.ADULT.bI.cB}
           </Typography>
         </Stack>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mt: 1 }}>
           <WorkOutlineIcon color="primary" />
           <Typography variant="body1">
-            <strong>Check-In Baggage:</strong> 15 Kgs (1 piece only) / Adult
+            <strong>Check-In Baggage:</strong> {flightDetails.tripInfos[0].totalPriceList[0].fd.ADULT.bI.iB} / Adult
           </Typography>
         </Stack>
       </Paper>
@@ -201,9 +209,9 @@ const FlightItinerary = () => {
       {/* Extra Baggage Section */}
       <Paper sx={{ p: 2, mt: 2, bgcolor: "#e3f2fd", borderRadius: 2 }}>
         <Typography variant="body2">
-          Got excess baggage? Don't stress, buy extra check-in baggage allowance for BLR-IXE at fab rates!
+          Got excess baggage? Don't stress, buy extra check-in baggage allowance for {flightDetails.tripInfos[0].sI[0].da.city} - {flightDetails.tripInfos[0].sI[0].aa.city} at fab rates!
         </Typography>
-        <Button variant="contained" sx={{ mt: 1 }} size="small">
+        <Button variant="contained" sx={{ mt: 1,backgroundColor: "#FF6748" }} size="small">
           ADD BAGGAGE
         </Button>
       </Paper>
@@ -224,13 +232,13 @@ const FlightItinerary = () => {
 
       {/* Airline & Route */}
       <Stack direction="row" alignItems="center" spacing={2}>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Air_India_Express_Logo.svg"
-          alt="Air India Express"
-          width={40}
-        />
+      <img
+              src={`/AirlinesLogo/${airlineCode}.png`}
+              alt={airlineName}
+              style={{ width: 20, height: "auto" }}
+            />
         <Typography variant="body1" fontWeight="bold">
-          BLR-IXE
+        {flightDetails.tripInfos[0].sI[0].da.code} - {flightDetails.tripInfos[0].sI[0].aa.code} 
         </Typography>
       </Stack>
 
@@ -290,9 +298,9 @@ const FlightItinerary = () => {
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
         <Stack direction="row" alignItems="center" spacing={1}>
           <Add fontSize="small" color="disabled" />
-          <Typography variant="body2">Taxes and Surcharges</Typography>
+          <Typography variant="body2">Taxes</Typography>
         </Stack>
-        <Typography variant="body2">₹ {flightDetails?.totalPriceInfo.totalFareDetail.fC.TAF}</Typography>
+        <Typography variant="body2">₹{flightDetails?.totalPriceInfo.totalFareDetail.fC.TAF}</Typography>
       </Stack>
 
       <Divider sx={{ my: 2 }} />
@@ -341,10 +349,14 @@ const FlightItinerary = () => {
 
       {/* View All Coupons Link */}
       <Box sx={{ mt: 1, textAlign: "center" }}>
-        <Link href="#" underline="hover" fontWeight="bold" color="primary">
+        <Link href="#" underline="hover" fontWeight="bold" color="#05073c">
           VIEW ALL COUPONS
         </Link>
       </Box>
+        
+          <Button variant="contained" sx={{ mt: 1, backgroundColor: "#FF6748" }} size="small" onClick={handleBooking}>
+          Book Now
+        </Button>
     </Paper>
         </Paper>
       </Grid>
